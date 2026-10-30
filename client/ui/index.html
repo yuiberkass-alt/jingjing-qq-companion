@@ -1,0 +1,1067 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>鲸鲸控制台</title>
+<link rel="icon" type="image/png" href="/icon.png">
+<style>
+:root{
+  --bg:#111113; --surface:#18191b; --surface-2:#212225; --surface-3:#2a2c30;
+  --line:#272a2d; --line-strong:#363a3f;
+  --text:#edeef0; --text-2:#b0b4ba; --text-3:#8b8d98;
+  --accent:#4fc3f7; --accent-ink:#08131d;
+  --ok:#4ade80; --warn:#fbbf24; --bad:#f87171;
+  --r-lg:14px; --r-md:10px; --r-sm:8px;
+  --ctl:36px;
+  --shadow-1:0 1px 2px rgba(0,0,0,.35);
+  --shadow-2:0 16px 40px rgba(0,0,0,.55);
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --ease-in:cubic-bezier(.4,0,1,1);
+  --spring:cubic-bezier(.34,1.25,.64,1);
+  --fast:150ms;
+}
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body{
+  margin:0;min-height:100vh;color:var(--text);
+  font:14px/1.6 "Segoe UI","Microsoft YaHei",system-ui,sans-serif;
+  background:
+    radial-gradient(760px 420px at 8% -12%, rgba(79,195,247,.10), transparent 60%),
+    var(--bg);
+  background-attachment:fixed;
+  -webkit-font-smoothing:antialiased;
+}
+@keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes popIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+header{
+  display:flex;align-items:center;gap:16px;height:56px;padding:0 24px;
+  position:sticky;top:0;z-index:20;flex-wrap:nowrap;
+  background:rgba(17,17,19,.72);backdrop-filter:blur(18px) saturate(180%);
+  border-bottom:1px solid var(--line);
+}
+header h1{
+  margin:0;font-size:14px;font-weight:650;letter-spacing:.2px;color:var(--text);
+  display:flex;align-items:center;gap:8px;white-space:nowrap;
+}
+header h1::before{
+  content:"";width:8px;height:8px;border-radius:50%;
+  background:var(--accent);box-shadow:0 0 12px rgba(79,195,247,.7);
+}
+nav{
+  display:flex;gap:2px;padding:3px;border-radius:var(--r-md);
+  background:var(--surface-2);border:1px solid var(--line);
+  overflow-x:auto;scrollbar-width:none;
+}
+nav::-webkit-scrollbar{display:none}
+nav button{
+  height:28px;padding:0 12px;border:0;border-radius:7px;background:transparent;
+  color:var(--text-2);font-size:14px;cursor:pointer;white-space:nowrap;
+  transition:background var(--fast) var(--ease-out),color var(--fast) var(--ease-out);
+}
+nav button:hover{color:var(--text);background:rgba(255,255,255,.04)}
+nav button.on{color:var(--text);background:var(--surface-3);box-shadow:var(--shadow-1)}
+main{padding:24px;max-width:1200px;margin:0 auto}
+section{animation:rise 250ms var(--ease-out)}
+.page-head{display:flex;align-items:center;gap:12px;margin:0 0 16px}
+.page-head h2{margin:0;font-size:18px;font-weight:600;letter-spacing:.2px}
+
+.card{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);
+  padding:20px;margin-bottom:16px;
+  transition:border-color 200ms var(--ease-out);
+}
+.card:hover{border-color:var(--line-strong)}
+.cards2{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:16px;align-items:start}
+.cards2 .card{margin-bottom:0;height:100%}
+
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+input,select,textarea{
+  font:inherit;color:var(--text);background:#131416;border:1px solid var(--line);
+  border-radius:var(--r-md);padding:0 12px;height:var(--ctl);
+  transition:border-color var(--fast) var(--ease-out),box-shadow var(--fast) var(--ease-out);
+}
+textarea{height:auto;padding:10px 12px;line-height:1.6}
+input::placeholder,textarea::placeholder{color:var(--text-3)}
+input:focus,select:focus,textarea:focus{
+  outline:none;border-color:rgba(79,195,247,.55);
+  box-shadow:0 0 0 3px rgba(79,195,247,.14);
+}
+button{
+  height:var(--ctl);padding:0 14px;border-radius:var(--r-md);cursor:pointer;
+  font:inherit;color:var(--text);background:var(--surface-2);border:1px solid var(--line);
+  transition:background var(--fast) var(--ease-out),border-color var(--fast) var(--ease-out),
+             transform 120ms var(--ease-out);
+}
+button:hover{background:var(--surface-3);border-color:var(--line-strong)}
+button:active{transform:scale(.97)}
+button.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:600}
+button.primary:hover{background:#6fd0fa;border-color:#6fd0fa}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+button:disabled{opacity:.45;cursor:not-allowed}
+button.loading{position:relative;color:transparent!important}
+button.loading::after{
+  content:"";position:absolute;inset:0;margin:auto;width:14px;height:14px;border-radius:50%;
+  border:2px solid rgba(255,255,255,.3);border-top-color:currentColor;animation:spin .7s linear infinite;
+}
+label.tiny{color:var(--text-2)}
+
+table{width:100%;border-collapse:collapse}
+th,td{text-align:left;padding:12px 8px;border-bottom:1px solid var(--line);vertical-align:middle}
+tbody tr{transition:background var(--fast) var(--ease-out)}
+tbody tr:hover{background:var(--surface-2)}
+tbody tr:last-child td{border-bottom:0}
+th{color:var(--text-2);font-weight:500;font-size:12px;position:sticky;top:0;background:var(--surface);z-index:1}
+
+.badge{
+  display:inline-flex;align-items:center;height:20px;padding:0 8px;border-radius:999px;
+  font-size:12px;line-height:1;border:1px solid var(--line-strong);color:var(--text-2);
+}
+.badge.member{color:var(--ok);border-color:rgba(74,222,128,.35)}
+.core{color:#c4b5fd;border-color:rgba(196,181,253,.35)}
+.group{color:var(--accent);border-color:rgba(79,195,247,.35)}
+.mut{color:var(--text-2)}
+.tiny{font-size:12px}
+
+.msg{padding:12px 14px;border-radius:var(--r-md);margin-bottom:16px;display:none}
+.msg.show{display:block;animation:rise 250ms var(--ease-out)}
+.msg.ok{background:rgba(74,222,128,.10);border:1px solid rgba(74,222,128,.28)}
+.msg.bad{background:rgba(248,113,113,.10);border:1px solid rgba(248,113,113,.28)}
+
+.memlist{display:flex;flex-direction:column}
+.memitem{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:start;
+  padding:14px 4px;border-bottom:1px solid var(--line);transition:background 150ms var(--ease-out)}
+.memitem:last-child{border-bottom:0}
+.memitem:hover{background:var(--surface-2)}
+.memitem.dim{opacity:.5}
+.memtext{min-width:0;word-break:break-word}
+.memmeta{margin-top:6px;color:var(--text-3);font-size:12px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.acts{display:flex;gap:6px;opacity:0;transition:opacity 150ms var(--ease-out)}
+.memitem:hover .acts,.memitem:focus-within .acts{opacity:1}
+.iconbtn{height:28px;min-width:34px;padding:0 8px;font-size:12px;color:var(--text-2)}
+.iconbtn:hover{color:var(--text)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.kv{font-size:14px}
+.kv b{display:block;color:var(--text-2);font-weight:500;font-size:12px;margin-bottom:4px}
+
+dialog{
+  border:1px solid var(--line-strong);border-radius:16px;background:var(--surface);
+  color:var(--text);padding:0;width:min(640px,92vw);box-shadow:var(--shadow-2);
+}
+dialog[open]{animation:popIn 220ms var(--spring)}
+dialog::backdrop{background:rgba(0,0,0,.6);backdrop-filter:blur(2px)}
+dialog .body{padding:20px}
+dialog h3{margin:0 0 16px;font-size:18px;font-weight:600}
+
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-thumb{background:var(--surface-3);border-radius:999px;border:2px solid var(--bg)}
+::-webkit-scrollbar-thumb:hover{background:var(--line-strong)}
+::-webkit-scrollbar-track{background:transparent}
+
+td button{height:30px;padding:0 10px;font-size:12px}
+#gCanvas{cursor:default;border-radius:var(--r-lg) !important}
+#gCanvas.dragging{box-shadow:0 0 0 2px rgba(79,195,247,.35)}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>鲸鲸控制台</h1>
+  <nav>
+    <button data-tab="mem" class="on">记忆</button>
+    <button data-tab="promo">待审核 <span id="promoCount" class="mut"></span></button>
+    <button data-tab="spaces">群设置</button>
+    <button data-tab="status">状态</button>
+    <button data-tab="notes">笔记</button>
+    <button data-tab="graph">图谱</button>
+    <button data-tab="account">账号</button>
+    <button data-tab="persona">人格</button>
+    <button data-tab="ops">运维</button>
+  </nav>
+  <span style="flex:1"></span>
+  <button class="ghost" id="quit">退出</button>
+</header>
+
+<main>
+  <div id="banner" class="msg bad" style="display:none"></div>
+  <div id="msg" class="msg"></div>
+
+  <section id="tab-mem">
+    <div class="page-head"><h2>记忆</h2>
+      <span style="flex:1"></span>
+      <label class="tiny mut" style="display:flex;align-items:center;gap:6px">
+        <input type="checkbox" id="autoMem"> 自动记忆</label>
+    </div>
+    <div class="card">
+      <div class="row" style="margin-bottom:14px">
+        <input id="fSearch" placeholder="搜索记忆" style="flex:1;min-width:200px">
+        <select id="fScope">
+          <option value="">全部</option>
+          <option value="core">核心</option>
+          <option value="group">群</option>
+          <option value="member">成员</option>
+        </select>
+        <button class="ghost" id="advBtn">筛选</button>
+        <button class="primary" id="addBtn">新增</button>
+      </div>
+      <div class="row" id="advPanel" hidden style="margin-bottom:14px">
+        <input id="fGroup" placeholder="群号" style="width:150px">
+        <input id="fUser" placeholder="成员 QQ" style="width:150px">
+        <label class="tiny mut" style="display:flex;align-items:center;gap:6px">
+          <input type="checkbox" id="showDeleted"> 显示已删除</label>
+        <button class="ghost" id="reload">刷新</button>
+      </div>
+      <div id="memBody" class="memlist"><div class="mut tiny">加载中</div></div>
+    </div>
+  </section>
+
+  <section id="tab-promo" hidden>
+    <div class="page-head"><h2>待审核</h2></div>
+    <div class="card">
+      <div class="row" style="margin-bottom:10px"><b>待审核的提升申请</b><span class="mut tiny">群记忆要进入核心记忆，必须在这里批准</span></div>
+      <table>
+        <thead><tr><th style="width:56px">ID</th><th style="width:64px">来源</th><th>内容</th><th style="width:150px">备注</th><th style="width:150px">操作</th></tr></thead>
+        <tbody id="promoBody"><tr><td colspan="5" class="mut">暂无</td></tr></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="tab-spaces" hidden>
+    <div class="page-head"><h2>群设置</h2></div>
+    <div class="card">
+      <div class="row" style="margin-bottom:10px"><b>群与成员授权</b><span class="mut tiny">关闭后该群不召回任何记忆</span>
+        <span style="flex:1"></span><button class="primary" id="addGroupBtn">登记群号</button></div>
+      <table>
+        <thead><tr><th style="width:140px">群号</th><th style="width:110px">记忆开关</th><th>已授权成员</th><th style="width:200px">操作</th></tr></thead>
+        <tbody id="spaceBody"></tbody>
+      </table>
+    </div>
+    <div class="card">
+      <div class="row" style="margin-bottom:10px"><b>自动接话</b>
+        <span style="flex:1"></span>
+        <label class="tiny mut" style="display:flex;align-items:center;gap:8px">
+          <input type="checkbox" id="autoReply"> 允许她主动接群聊</label>
+      </div>
+      <div class="mut tiny" id="autoReplyHint">关闭后只有叫名字或 @ 她才说话</div>
+    </div>
+    <div class="card">
+      <div class="row" style="margin-bottom:8px"><b>群相处</b>
+        <span class="mut tiny">样本不足 10 次不给提示</span>
+        <span style="flex:1"></span><button class="ghost" id="styleRefresh">刷新</button></div>
+      <table>
+        <thead><tr><th style="width:130px">群号</th><th style="width:90px">回复</th><th style="width:90px">接着聊</th><th style="width:80px">比例</th><th>给它的提示</th></tr></thead>
+        <tbody id="styleBody"></tbody>
+      </table>
+    </div>
+    <div class="card">
+      <div class="row" style="margin-bottom:8px"><b>和群友的熟悉度</b>
+        <span class="mut tiny">每天最多涨 10</span>
+        <span style="flex:1"></span><button class="ghost" id="relRefresh">刷新</button></div>
+      <table>
+        <thead><tr><th style="width:130px">群号</th><th>昵称</th><th style="width:90px">互动</th><th style="width:110px">阶段</th></tr></thead>
+        <tbody id="relBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="tab-notes" hidden>
+    <div class="page-head"><h2>笔记</h2><button class="ghost" id="noteReload" style="margin-left:auto">刷新</button></div>
+    <div class="cards2" id="noteList"></div>
+  </section>
+
+  <section id="tab-graph" hidden>
+    <div class="page-head"><h2>图谱</h2></div>
+    <div class="card">
+      <div class="row" style="margin-bottom:8px">
+        <b>记忆图谱</b>
+        <span class="mut tiny" id="gStats"></span>
+        <span style="flex:1"></span>
+        <input id="gGroup" placeholder="群号（留空看全部）" style="width:190px">
+        <button class="primary" id="gLoad">刷新</button>
+      </div>
+      <canvas id="gCanvas" style="width:100%;height:560px;background:#131416;border:1px solid var(--line);border-radius:14px"></canvas>
+      <div id="gDetail" class="tiny mut" style="margin-top:8px">拖动摆放，双击取消固定</div>
+      <div class="mut tiny" style="margin-top:6px">
+        颜色 <span style="color:#7dd3fc">成员</span>         <span style="color:#fbbf24">记忆</span>         <span style="color:#a78bfa">类型</span>         <span style="color:#4ade80">关键词</span>         <span style="color:#94a3b8">群/核心</span>；圈越大表示被提到次数越多
+      </div>
+    </div>
+  </section>
+
+  <section id="tab-account" hidden>
+    <div class="cards2">
+    <div class="page-head" style="grid-column:1/-1"><h2>账号</h2></div>
+    <div class="card">
+      <div class="row" style="margin-bottom:10px"><b>QQ 机器人</b></div>
+      <div class="grid" id="accGrid"></div>
+      <div class="row" style="margin-top:12px">
+        <button class="primary" id="loginBtn">打开 NapCat 登录页</button>
+        <button class="ghost" id="tokenBtn">复制登录 token</button>
+        <span class="mut tiny" id="loginHint"></span>
+      </div>
+      <div class="mut tiny" style="margin-top:10px">
+        掉线时在这里扫码登录。登录页只在本机可见。
+      </div>
+    </div>
+    <div class="card">
+      <div class="row" style="margin-bottom:10px"><b>B 站</b><span class="mut tiny" id="biliState">读取中…</span></div>
+      <div class="grid">
+        <div class="kv"><b>SESSDATA</b><input id="biliSess" type="password" placeholder="粘贴 cookie 里的 SESSDATA" style="width:100%"></div>
+        <div class="kv"><b>bili_jct（发私信要用）</b><input id="biliJct" type="password" placeholder="bili_jct" style="width:100%"></div>
+        <div class="kv"><b>buvid3（可空）</b><input id="biliBuvid" placeholder="buvid3" style="width:100%"></div>
+        <div class="kv"><b>你的 B 站 UID</b><input id="biliOwner" placeholder="数字 UID，私信对象" style="width:100%"></div>
+      </div>
+      <div class="row" style="margin-top:12px">
+        <button class="primary" id="biliSave">保存到服务器</button>
+        <label class="tiny mut" style="display:flex;align-items:center;gap:6px">
+          <input type="checkbox" id="biliRoam"> 允许她自己逛 B 站</label>
+        <span class="mut tiny">cookie 只写在服务器（600），不会回显</span>
+      </div>
+      <div class="mut tiny" style="margin-top:10px">
+        cookie 从浏览器开发者工具的 Cookies 里复制。
+      </div>
+    </div>
+    <div class="card">
+      <div class="row" style="margin-bottom:6px"><b>其它平台</b></div>
+      <div class="grid" id="platGrid"></div>
+      <div class="mut tiny" style="margin-top:8px">微信与 B 站本阶段未接入，记忆库的 platform 字段已预留。</div>
+    </div>
+    </div>
+  </section>
+
+  <section id="tab-persona" hidden>
+    <div class="page-head"><h2>人格</h2></div>
+    <div class="card">
+      <div class="row" style="margin-bottom:10px">
+        <b>人格 prompt</b>
+        <select id="pSel" style="min-width:200px"></select>
+        <button class="ghost" id="pLoad">读取</button>
+        <span style="flex:1"></span>
+        <button class="ghost" id="pVersions">历史版本</button>
+        <button class="primary" id="pSave">保存</button>
+      </div>
+      <div class="mut tiny" style="margin-bottom:8px">保存会先自动备份旧版本；保存后需要重启 AstrBot 才生效（运维页可重启）。</div>
+      <textarea id="pText" style="min-height:420px;font-family:Consolas,'Microsoft YaHei',monospace;font-size:14px"></textarea>
+      <div class="row" style="margin-top:10px">
+        <input id="pMsg" placeholder="试一句，比如：鲸鲸，今天好累" style="flex:1">
+        <button class="ghost" id="pTry">试聊（不保存）</button>
+      </div>
+      <div id="pReply" class="tiny" style="margin-top:8px;display:none;white-space:pre-wrap"></div>
+      <div id="pInfo" class="tiny mut" style="margin-top:6px"></div>
+      <div id="pVerList" class="tiny" style="margin-top:8px"></div>
+    </div>
+  </section>
+
+  <section id="tab-ops" hidden>
+    <div class="page-head"><h2>运维</h2></div>
+    <div class="cards2">
+    <div class="card" style="grid-column:1/-1">
+      <div class="row" style="margin-bottom:10px"><b>最近回复</b><span class="mut tiny">来自服务器日志，只读</span>
+        <span style="flex:1"></span><button class="ghost" id="recentBtn">刷新</button></div>
+      <div id="recentList" class="tiny mut">点「刷新」加载</div>
+    </div>
+    <div class="card">
+      <div class="row" style="margin-bottom:6px"><b>备份记忆库</b></div>
+      <div class="mut tiny" style="margin-bottom:10px">先在服务器生成快照，再下载到本地</div>
+      <button class="primary" id="backupBtn">立即备份</button>
+      <div id="backupOut" class="tiny" style="margin-top:8px"></div>
+    </div>
+    <div class="card">
+      <div class="row" style="margin-bottom:6px"><b>记忆体检</b>
+        <span class="mut tiny">只报告，不修改</span></div>
+      <button class="ghost" id="healthBtn">体检一次</button>
+      <div id="healthOut" class="tiny" style="margin-top:8px"></div>
+    </div>
+    <div class="card">
+      <div class="row" style="margin-bottom:6px"><b>整理记忆</b></div>
+      <div class="mut tiny" style="margin-bottom:10px">合并重复，刷新群印象，统计长期未更新的条目。不删除数据。</div>
+      <button class="ghost" id="tidyBtn">整理一次</button>
+      <div id="tidyOut" class="tiny" style="margin-top:8px"></div>
+    </div>
+    <div class="card">
+      <div class="row" style="margin-bottom:6px"><b>重启 AstrBot</b></div>
+      <div class="mut tiny" style="margin-bottom:10px">约 30 秒，期间 QQ 不回复</div>
+      <button class="ghost" id="restartBtn" style="border-color:#5c2a2a;color:#ef6b6b">重启（需确认）</button>
+      <div id="restartOut" class="tiny" style="margin-top:8px"></div>
+    </div>
+    </div>
+  </section>
+
+  <section id="tab-status" hidden>
+    <div class="page-head"><h2>状态</h2></div>
+    <div class="card"><div class="grid" id="statusGrid"></div></div>
+    <div class="card">
+      <div class="row"><button class="ghost" id="statReload">刷新状态</button>
+      <span class="mut tiny">只读</span></div>
+    </div>
+    <div class="card">
+      <div class="row" style="margin-bottom:8px"><b>行为报告</b>
+        <span class="mut tiny">最近 24 小时：说了多少、沉默多少、多快</span>
+        <span style="flex:1"></span>
+        <button class="ghost" id="reportBtn">生成报告</button></div>
+      <div class="grid" id="reportGrid"></div>
+      <div class="mut tiny" id="reportNote" style="margin-top:8px"></div>
+    </div>
+  </section>
+</main>
+
+<dialog id="dlg">
+  <form method="dialog" class="body" id="dlgForm">
+    <h3 id="dlgTitle">编辑记忆</h3>
+    <div class="row" style="margin-bottom:8px">
+      <select id="eScope"><option value="core">核心</option><option value="group">群</option><option value="member">成员</option></select>
+      <input id="eGroup" placeholder="群号" style="width:150px">
+      <input id="eUser" placeholder="成员QQ" style="width:150px">
+      <select id="eCategory">
+        <option value="identity">身份</option><option value="style">风格</option><option value="boundary">边界</option>
+        <option value="group_lore">群梗</option><option value="group_rule">群约定</option>
+        <option value="interest">兴趣</option><option value="preferred_name">称呼偏好</option>
+        <option value="interaction_boundary">互动边界</option><option value="shared_episode">共同经历</option>
+        <option value="preference">偏好</option>
+      </select>
+    </div>
+    <textarea id="eContent" placeholder="记忆内容（一句话，具体、可核对）"></textarea>
+    <div class="row" style="margin-top:12px;justify-content:flex-end">
+      <button value="cancel" class="ghost">取消</button>
+      <button value="ok" class="primary">保存</button>
+    </div>
+  </form>
+</dialog>
+
+<script>
+const $=s=>document.querySelector(s);
+let editingId=null;
+function msg(t,bad){const m=$('#msg');m.textContent=t;m.className='msg show '+(bad?'bad':'ok');setTimeout(()=>m.className='msg',4000)}
+async function rpc(argv){
+  const r=await fetch('/api/rpc',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({argv})});
+  const j=await r.json();
+  if(j.ok===false){msg(j.error||'操作失败',true);throw new Error(j.error||'rpc')}
+  return j;
+}
+function esc(s){return (s??'').toString().replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+const SCOPE={core:'核心',group:'群',member:'成员'};
+const CAT={identity:'身份',style:'风格',boundary:'边界',group_lore:'群梗',group_rule:'群约定',interest:'兴趣',preferred_name:'称呼',interaction_boundary:'边界',shared_episode:'共同经历',preference:'偏好'};
+function sc(scope,group,user){
+  let s='<span class="badge '+scope+'">'+(SCOPE[scope]||scope)+'</span> ';
+  if(scope!=='core') s+='<span class="tiny mut">'+(group||'')+(user?(' / '+user):'')+'</span>';
+  return s;
+}
+async function loadAutoMem(){
+  try{
+    const j=await rpc(['settings']);
+    const row=(j.items||[]).find(x=>x.key==='extract_enabled');
+    $('#autoMem').checked = !row || row.value!=='0';
+  }catch(e){}
+}
+$('#autoMem').onchange=async ev=>{
+  await rpc(['set-setting','--key','extract_enabled','--value',ev.target.checked?'1':'0']);
+  msg(ev.target.checked?'已开启自动记忆（下次聊天起生效）':'已关闭自动记忆');
+};
+async function loadMem(){
+  const argv=['list','--limit','300'];
+  const scope=$('#fScope').value; if(scope) argv.push('--scope',scope);
+  const g=$('#fGroup').value.trim(); if(g) argv.push('--group',g);
+  const u=$('#fUser').value.trim(); if(u) argv.push('--user',u);
+  const q=$('#fSearch').value.trim(); if(q) argv.push('--search',q);
+  const j=await rpc(argv);
+  const showDeleted=$('#showDeleted').checked;
+  const rows=(j.items||[]).filter(r=>showDeleted || r.status==='active');
+  const box=$('#memBody');
+  if(!rows.length){ box.innerHTML='<div class="mut tiny">没有匹配的记忆</div>'; return; }
+  box.innerHTML = rows.map(r=>{
+    const meta=[(CAT[r.category]||r.category),
+                r.scope==='core'?'全局':(r.user_id||r.group_id||''),
+                (r.last_seen_at||r.updated_at||'').replace('T',' ').slice(5,16)].filter(Boolean).join('　');
+    const badge=(r.evidence_count||1)>1?'<span class="badge member">'+r.evidence_count+' 次</span>':'';
+    const dead=r.status!=='active'?'<span class="badge">已删除</span>':'';
+    return '<div class="memitem'+(r.status!=='active'?' dim':'')+'">'+
+      '<div class="memtext">'+esc(r.content)+
+        '<div class="memmeta">'+esc(meta)+' '+badge+dead+'</div></div>'+
+      '<div class="acts">'+
+        '<button class="iconbtn" title="编辑" onclick="edit('+r.id+')">改</button>'+
+        (r.scope!=='core'?'<button class="iconbtn" title="提升到核心" onclick="promote('+r.id+')">核</button>':'')+
+        '<button class="iconbtn" title="'+(r.status==='deleted'?'恢复':'删除')+'" onclick="del('+r.id+')">'+(r.status==='deleted'?'复':'删')+'</button>'+
+      '</div></div>';
+  }).join('');
+}
+
+async function loadPromo(){
+  const j=await rpc(['promotions','--status','pending']);
+  const rows=j.items||[];
+  $('#promoCount').textContent=rows.length?('('+rows.length+')'):'';
+  $('#promoBody').innerHTML = rows.length? rows.map(r=>
+    '<tr><td>'+r.id+'</td><td class="tiny">'+r.source_memory_id+'</td><td>'+esc(r.content)+'</td>'+
+    '<td class="tiny mut">'+esc(r.note||'')+'</td>'+
+    '<td><button class="primary" onclick="decide('+r.id+',1)">批准</button> <button class="ghost" onclick="decide('+r.id+',0)">驳回</button></td></tr>'
+  ).join('') : '<tr><td colspan="5" class="mut">暂无待审核</td></tr>';
+}
+const STAGE={new:'刚认识',familiar:'逐渐熟悉',close:'熟人',old:'默契老熟人'};
+async function loadChatFlag(){
+  try{
+    const r=await fetch('/api/chat'); const j=await r.json();
+    if(!j.ok){ $('#autoReplyHint').textContent='读取失败'; return; }
+    $('#autoReply').checked=!!j.active_reply;
+    $('#autoReplyHint').textContent = j.active_reply
+      ? '她会在判定合适时主动接话'
+      : '只有叫名字或 @ 她才说话';
+  }catch(e){ $('#autoReplyHint').textContent='读取失败'; }
+}
+$('#autoReply').onchange=async ev=>{
+  const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({active_reply:ev.target.checked})});
+  const j=await r.json();
+  if(!j.ok){ msg('保存失败', true); return; }
+  msg(j.active_reply? '已开启主动接话，重启后生效' : '已关闭，重启后生效');
+  loadChatFlag();
+};
+async function loadStyle(){
+  const j=await rpc(['style','--limit','20']);
+  const rows=j.items||[];
+  $('#styleBody').innerHTML = rows.length? rows.map(r=>
+    '<tr><td>'+r.group_id+'</td><td>'+r.replies+'</td><td>'+r.continued+'</td><td>'+
+    Math.round((r.rate||0)*100)+'%</td><td class="tiny">'+esc(r.hint||'样本还不够')+'</td></tr>').join('')
+    : '<tr><td colspan="5" class="mut">还没有数据</td></tr>';
+}
+async function loadRelations(){
+  const j=await rpc(['relations','--limit','30']);
+  const rows=j.items||[];
+  $('#relBody').innerHTML = rows.length? rows.map(r=>
+    '<tr><td class="tiny">'+r.group_id+'</td><td>'+esc(r.nickname||r.user_id)+'</td><td>'+r.interactions+
+    '</td><td><span class="badge member">'+(STAGE[r.stage]||r.stage)+'</span></td></tr>').join('')
+    : '<tr><td colspan="4" class="mut">还没有互动记录</td></tr>';
+}
+$('#styleRefresh').onclick=()=>{loadStyle();loadRelations();};
+$('#relRefresh').onclick=()=>loadRelations();
+async function loadSpaces(){
+  const j=await rpc(['spaces']);
+  const byGroup={};
+  (j.spaces||[]).forEach(s=>{byGroup[s.group_id]={enabled:s.enabled,approved:(s.approved!==0),auto:(s.auto_consent!==0),users:[]}});
+  (j.consents||[]).forEach(c=>{const g=byGroup[c.group_id]=byGroup[c.group_id]||{enabled:0,approved:false,users:[]};g.users.push(c)});
+  const ids=Object.keys(byGroup).sort();
+  $('#spaceBody').innerHTML = ids.length? ids.map(g=>{
+    const info=byGroup[g];
+    const pending = !info.approved;
+    const users=(info.users||[]).map(u=>'<span class="badge member">'+u.user_id+(u.consent?' ✓':' ✗')+'</span>').join(' ')||'<span class="mut tiny">无</span>';
+    const state = pending ? '<span class="badge" style="color:#f0b429;border-color:#5c4a1d">待审核</span>'
+                          : (info.enabled?'<span class="badge member">已开通</span>':'<span class="badge">已关闭</span>');
+    const autoLabel = info.auto ? '<span class="badge member">自动记住成员</span>' : '<span class="badge" style="color:#f0b429;border-color:#5c4a1d">只记群公共</span>';
+    const ops = pending
+      ? '<button class="primary" onclick="approveGroup(\''+g+'\',1)">通过</button> <button class="ghost" onclick="approveGroup(\''+g+'\',0)">驳回</button>'
+      : '<button class="ghost" onclick="setSpace(\''+g+'\','+(info.enabled?0:1)+')">'+(info.enabled?'关闭':'开启')+'</button> '+
+        '<button class="ghost" onclick="toggleAuto(\''+g+'\','+(info.auto?0:1)+')">'+(info.auto?'改回只记群公共':'改成自动记住成员')+'</button> '+
+        '<button class="ghost" onclick="addConsent(\''+g+'\')">加授权成员</button>';
+    return '<tr><td>'+g+'</td><td>'+state+'<br>'+autoLabel+'</td><td>'+users+'</td><td>'+ops+'</td></tr>';
+  }).join('') : '<tr><td colspan="4" class="mut">还没有群</td></tr>';
+
+}
+async function loadStatus(){
+  const r=await fetch('/api/status'); const j=await r.json();
+  if(!j.ok){$('#statusGrid').innerHTML='<div class="mut">读取失败：'+esc(j.error)+'</div>';return}
+  const mem=j.memory||{};
+  const byScope=(mem.by_scope||[]).map(x=>x.scope+':'+x.n).join('  ')||'无';
+  $('#statusGrid').innerHTML=[
+    ['容器',(j.containers||[]).join('<br>')||'未知'],
+    ['主插件版本',j.main_sha||'未知'],
+    ['近 6 小时回复数',j.replies_6h],
+    ['记忆分布',byScope],
+    ['待审核',mem.pending_promotions??'-'],
+    ['数据库大小',((mem.db_bytes||0)/1024).toFixed(0)+' KB']
+  ].map(([k,v])=>'<div class="kv"><b>'+k+'</b>'+v+'</div>').join('');
+}
+function openDlg(title){$('#dlgTitle').textContent=title;$('#dlg').showModal()}
+$('#addBtn').onclick=()=>{editingId=null;$('#eContent').value='';$('#eGroup').value=$('#fGroup').value.trim();$('#eUser').value=$('#fUser').value.trim();$('#eScope').value=$('#fScope').value||'member';openDlg('新增记忆')};
+window.edit=async id=>{
+  const j=await rpc(['list','--limit','500']);
+  const m=(j.items||[]).find(x=>x.id===id); if(!m) return;
+  editingId=id;$('#eScope').value=m.scope;$('#eGroup').value=m.group_id;$('#eUser').value=m.user_id;
+  $('#eCategory').value=m.category;$('#eContent').value=m.content;openDlg('编辑记忆 #'+id);
+};
+window.del=async id=>{
+  const j=await rpc(['list','--limit','500']);const m=(j.items||[]).find(x=>x.id===id);if(!m)return;
+  await rpc(['edit','--id',String(id),'--status',m.status==='deleted'?'active':'deleted']);
+  msg(m.status==='deleted'?'已恢复':'已删除');loadMem();
+};
+window.promote=async id=>{
+  await rpc(['promote','--id',String(id),'--note','用户从控制台提交']);
+  msg('已提交提升申请，去「待审核」批准');loadPromo();
+};
+window.decide=async(id,ok)=>{
+  await rpc(['decide','--promotion',String(id),ok?'--approve':'--reject']);
+  msg(ok?'已批准，已写入核心记忆':'已驳回');loadPromo();loadMem();
+};
+window.setSpace=async(g,on)=>{await rpc(['set-space','--group',g,'--enabled',on?'1':'0']);msg('已更新群开关');loadSpaces()};
+window.toggleAuto=async(g,on)=>{
+  await rpc(['set-space','--group',g,'--enabled','1','--auto-consent',on?'1':'0']);
+  msg(on?'已开启自动记住成员：不用再逐个授权了':'已改回只记群公共记忆');
+  loadSpaces();
+};
+window.approveGroup=async(g,ok)=>{
+  await rpc(['approve','--group',g, ...(ok?[]:['--reject'])]);
+  if(ok) msg('已开通。现在去 QQ 里让群管理员把鲸鲸拉进这个群（机器人不能用群号自己进群），进群后它才会在这个群说话和记记忆。');
+  else msg('已驳回');
+  loadSpaces();
+};
+window.addConsent=async g=>{
+  const u=prompt('要授权的成员QQ号'); if(!u) return;
+  await rpc(['set-consent','--group',g,'--user',u.trim(),'--consent','1']);msg('已授权');loadSpaces();
+};
+$('#dlgForm').addEventListener('submit',async ev=>{
+  if(ev.submitter && ev.submitter.value==='cancel') return;
+  ev.preventDefault();
+  const scope=$('#eScope').value,group=scope==='core'?'':$('#eGroup').value.trim(),user=scope==='member'?$('#eUser').value.trim():'';
+  const content=$('#eContent').value.trim(),category=$('#eCategory').value;
+  if(!content){msg('内容不能为空',true);return}
+  try{
+    if(editingId){await rpc(['edit','--id',String(editingId),'--content',content,'--category',category]);msg('已保存')}
+    else{await rpc(['add','--scope',scope,'--category',category,'--content',content,'--group',group,'--user',user]);msg('已新增')}
+    $('#dlg').close();loadMem();loadStatus();
+  }catch(e){}
+});
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('nav button').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');
+  ['mem','promo','spaces','status','ops','persona','account','graph','notes'].forEach(t=>$('#tab-'+t).hidden=(t!==b.dataset.tab));
+  if(b.dataset.tab==='promo')loadPromo();
+  if(b.dataset.tab==='spaces')loadSpaces();
+  if(b.dataset.tab==='status')loadStatus();
+  if(b.dataset.tab==='persona')loadPersonas();
+  if(b.dataset.tab==='account'){loadAccount();loadBili();}
+  if(b.dataset.tab==='notes')loadNotes();
+  if(b.dataset.tab==='graph')loadGraph();
+  if(b.dataset.tab==='spaces'){loadStyle();loadRelations();loadChatFlag();}
+});
+async function loadNotes(){
+  const j=await rpc(['list','--limit','300']);
+  const notes=(j.items||[]).filter(x=>x.category==='note'||x.category==='self_note');
+  const box=$('#noteList');
+  if(!notes.length){ box.innerHTML='<div class="card mut">还没有笔记，聊几句就会生成</div>'; return; }
+  box.innerHTML=notes.map(n=>{
+    const who = n.category==='self_note' ? ('群 '+n.group_id+' 的相处经验') : (n.user_id||'');
+    return '<div class="card"><div class="row" style="margin-bottom:10px">'+
+      '<b>'+esc(who)+'</b><span style="flex:1"></span>'+
+      '<button class="ghost" data-id="'+n.id+'">保存</button></div>'+
+      '<textarea data-id="'+n.id+'" style="min-height:96px;width:100%">'+esc(n.content)+'</textarea></div>';
+  }).join('');
+  box.querySelectorAll('button[data-id]').forEach(btn=>btn.onclick=async()=>{
+    const ta=box.querySelector('textarea[data-id="'+btn.dataset.id+'"]');
+    await rpc(['edit','--id',btn.dataset.id,'--content',ta.value]);
+    msg('已保存');
+  });
+}
+$('#noteReload').onclick=()=>loadNotes();
+$('#advBtn').onclick=()=>{ const p=$('#advPanel'); p.hidden=!p.hidden; };
+$('#showDeleted').onchange=()=>loadMem();
+let G={nodes:[],edges:[],selected:null};
+const NODE_COLORS={member:'#7dd3fc',memory:'#fbbf24',category:'#a78bfa',tag:'#4ade80',group:'#94a3b8',core:'#f472b6'};
+function gSize(n){return Math.min(20, 7 + Math.sqrt(n.weight||1)*4);}
+
+async function loadGraph(){
+  const g=$('#gGroup').value.trim();
+  const argv=['graph','--limit','120']; if(g) argv.push('--group',g);
+  let j;
+  try{ j=await rpc(argv); }
+  catch(e){
+    $('#gStats').textContent='读取失败：'+(e&&e.message?e.message:e);
+    $('#gDetail').textContent='如果一直失败，关掉控制台重新打开（后台服务可能已自动退出）';
+    return;
+  }
+  const nodes=(j.nodes||[]).map(n=>({...n}));
+  const byId={}; nodes.forEach(n=>byId[n.id]=n);
+  G.nodes=nodes;
+  G.edges=(j.edges||[]).map(e=>({source:byId[e.source],target:byId[e.target]})).filter(e=>e.source&&e.target);
+  G.selected=null;
+  G.nodes.forEach(n=>{ delete n.fixed; });
+  $('#gStats').textContent=(j.counts? j.counts.memories+' 条记忆，'+j.counts.nodes+' 节点，'+j.counts.edges+' 关系':'空');
+  $('#gDetail').textContent = nodes.length? '点一个圆点看内容' : '还没有记忆，先在群里聊几句或手动新增';
+  layoutGraph(); drawGraph();
+}
+
+function simulateGraph(steps){
+  const W=$('#gCanvas').clientWidth||900, H=$('#gCanvas').clientHeight||520;
+  const n=G.nodes.length; if(!n) return;
+  const cx=W/2, cy=H/2;
+  for(let step=0; step<steps; step++){
+    const cooling=1-step/(steps+40);
+    for(let i=0;i<n;i++){
+      for(let k=i+1;k<n;k++){
+        const a=G.nodes[i], b=G.nodes[k];
+        let dx=a.x-b.x, dy=a.y-b.y; let d2=dx*dx+dy*dy||0.01;
+        if(d2>90000) continue;
+        const d=Math.sqrt(d2), f=(2600/d2)*cooling;
+        dx/=d; dy/=d;
+        a.vx+=dx*f; a.vy+=dy*f; b.vx-=dx*f; b.vy-=dy*f;
+      }
+    }
+    G.edges.forEach(e=>{
+      const a=e.source, b=e.target;
+      let dx=b.x-a.x, dy=b.y-a.y; const d=Math.sqrt(dx*dx+dy*dy)||0.01;
+      const f=(d-110)*0.0025*cooling;
+      dx/=d; dy/=d;
+      a.vx+=dx*f*d*0.02; a.vy+=dy*f*d*0.02;
+      b.vx-=dx*f*d*0.02; b.vy-=dy*f*d*0.02;
+    });
+    G.nodes.forEach(x=>{
+      if(G.drag && G.drag.id===x.id){ x.vx=x.vy=0; return; }
+      if(x.fixed){ x.x=x.fixed.x; x.y=x.fixed.y; x.vx=x.vy=0; return; }
+      x.vx+=(cx-x.x)*0.0015*cooling; x.vy+=(cy-x.y)*0.0015*cooling;
+      x.x+=x.vx; x.y+=x.vy; x.vx*=0.86; x.vy*=0.86;
+      x.x=Math.max(30,Math.min(W-30,x.x)); x.y=Math.max(24,Math.min(H-24,x.y));
+    });
+  }
+}
+
+function layoutGraph(){
+  const W=$('#gCanvas').clientWidth||900, H=$('#gCanvas').clientHeight||520;
+  const n=G.nodes.length; if(!n) return;
+  const cx=W/2, cy=H/2, R=Math.min(W,H)*0.34;
+  G.nodes.forEach((node,i)=>{
+    const a=(i/Math.max(1,n))*Math.PI*2;
+    node.x=cx+Math.cos(a)*R*(0.6+0.4*Math.random());
+    node.y=cy+Math.sin(a)*R*(0.6+0.4*Math.random());
+    node.vx=node.vy=0;
+  });
+  simulateGraph(80);
+  animateGraph();
+}
+
+function nodeAt(x,y,pad){
+  // Every node gets the same generous grab area, so a small keyword dot is as
+  // easy to drag as a big memory dot.
+  let best=null, bestD=1e9;
+  G.nodes.forEach(n=>{
+    const r=Math.max(gSize(n)+(pad||8), 20);
+    const d=(n.x-x)**2+(n.y-y)**2;
+    if(d<r*r && d<bestD){ bestD=d; best=n; }
+  });
+  return best;
+}
+
+function drawGraph(){
+  const cv=$('#gCanvas'); const dpr=window.devicePixelRatio||1;
+  const W=cv.clientWidth||900, H=cv.clientHeight||520;
+  const bw=Math.round(W*dpr), bh=Math.round(H*dpr);
+  // Resizing the backing store is expensive and flashes; only do it when needed.
+  if(cv.width!==bw || cv.height!==bh){ cv.width=bw; cv.height=bh; }
+  const ctx=cv.getContext('2d');
+  if(!ctx) return;
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  ctx.clearRect(0,0,W,H);
+  const grad=ctx.createRadialGradient(W*0.5,H*0.42,20,W*0.5,H*0.42,Math.max(W,H)*0.75);
+  grad.addColorStop(0,'#101c28'); grad.addColorStop(1,'#0b1118');
+  ctx.fillStyle=grad; ctx.fillRect(0,0,W,H);
+
+  const focus = G.drag || G.hover || G.selected;
+  const related = new Set();
+  if(focus){
+    related.add(focus.id);
+    G.edges.forEach(e=>{
+      if(e.source.id===focus.id) related.add(e.target.id);
+      if(e.target.id===focus.id) related.add(e.source.id);
+    });
+  }
+  G.edges.forEach(e=>{
+    const hot = focus && (e.source.id===focus.id || e.target.id===focus.id);
+    ctx.strokeStyle = hot ? 'rgba(79,195,247,.65)' : 'rgba(148,163,184,.20)';
+    ctx.lineWidth = hot ? 1.6 : 1;
+    ctx.beginPath(); ctx.moveTo(e.source.x,e.source.y); ctx.lineTo(e.target.x,e.target.y); ctx.stroke();
+  });
+  G.nodes.forEach(n=>{
+    const r=gSize(n), color=NODE_COLORS[n.type]||'#94a3b8';
+    const dim = focus && !related.has(n.id);
+    if(!dim){
+      ctx.beginPath(); ctx.arc(n.x,n.y,r+6,0,Math.PI*2);
+      ctx.fillStyle=color; ctx.globalAlpha=0.10; ctx.fill(); ctx.globalAlpha=1;
+    }
+    ctx.beginPath(); ctx.arc(n.x,n.y,r,0,Math.PI*2);
+    ctx.fillStyle=color; ctx.globalAlpha=dim?0.32:(n.type==='memory'?0.95:1); ctx.fill(); ctx.globalAlpha=1;
+    if(n.fixed){
+      ctx.strokeStyle='rgba(79,195,247,.55)'; ctx.lineWidth=1.5;
+      ctx.setLineDash([3,3]); ctx.beginPath(); ctx.arc(n.x,n.y,r+4,0,Math.PI*2); ctx.stroke(); ctx.setLineDash([]);
+    }
+    if(focus && focus.id===n.id){ ctx.strokeStyle='#fff'; ctx.lineWidth=2; ctx.stroke(); }
+    ctx.fillStyle=dim?'rgba(203,213,225,.45)':'#cbd5e1';
+    ctx.font='12px ui-sans-serif, system-ui';
+    const maxLen = n.type==='memory' ? 9 : 14;
+    const raw=n.label||'';
+    const label=raw.length>maxLen? raw.slice(0,maxLen)+'…' : raw;
+    ctx.fillText(label, n.x+r+5, n.y+3);
+  });
+}
+
+let graphRaf=null;
+function animateGraph(maxSteps){
+  if(graphRaf) return;
+  let steps=0;
+  const tick=()=>{
+    simulateGraph(2);
+    drawGraph();
+    steps++;
+    const energy=G.nodes.reduce((s,n)=>s+Math.abs(n.vx)+Math.abs(n.vy),0);
+    if(steps<(maxSteps||180) && energy>0.25 && !document.hidden){
+      graphRaf=requestAnimationFrame(tick);
+    } else {
+      graphRaf=null;
+    }
+  };
+  graphRaf=requestAnimationFrame(tick);
+}
+
+$('#gLoad').onclick=()=>loadGraph();
+
+let dragStart=null;
+const DRAG_DEADZONE = 5;   // px before a click turns into a drag
+const PIN_THRESHOLD = 10;  // px: only a real drag pins the node
+
+function canvasPoint(ev){
+  const cv=$('#gCanvas'), rect=cv.getBoundingClientRect();
+  return { x: ev.clientX-rect.left, y: ev.clientY-rect.top };
+}
+
+function endDrag(commit){
+  const cv=$('#gCanvas');
+  if(!G.drag) return;
+  const node=G.drag;
+  const moved = dragStart && dragStart.moved>PIN_THRESHOLD;
+  G.drag=null; dragStart=null;
+  cv.style.cursor='default';
+  cv.classList.remove('dragging');
+  if(commit && moved){
+    node.fixed = { x: node.x, y: node.y };   // dropped where you left it
+  } else if(commit){
+    // A plain click must never leave the node pinned.
+    delete node.fixed;
+    G.selected=node;
+    $('#gDetail').textContent = node.full ? ('【'+(node.label||'')+'】'+node.full)
+                                          : ('【'+(node.label||'')+'】'+(node.type||''));
+  }
+  animateGraph(160);
+}
+
+$('#gCanvas').addEventListener('dblclick', ev=>{
+  // Double-click releases a pinned node so it can float again.
+  const p=canvasPoint(ev);
+  const hit=nodeAt(p.x,p.y,6);
+  if(hit && hit.fixed){ delete hit.fixed; animateGraph(160); }
+});
+$('#gCanvas').addEventListener('pointerdown', ev=>{
+  const cv=$('#gCanvas');
+  const p=canvasPoint(ev);
+  const hit=nodeAt(p.x,p.y,6);
+  if(!hit) return;
+  G.drag=hit; dragStart={x:p.x,y:p.y,moved:0,sx:hit.x,sy:hit.y};
+  try{ cv.setPointerCapture(ev.pointerId); }catch(e){}
+  cv.style.cursor='grabbing';
+  cv.classList.add('dragging');
+  drawGraph();
+});
+
+$('#gCanvas').addEventListener('pointermove', ev=>{
+  const cv=$('#gCanvas');
+  const p=canvasPoint(ev);
+  if(G.drag){
+    const dist=Math.hypot(p.x-dragStart.x, p.y-dragStart.y);
+    dragStart.moved=Math.max(dragStart.moved, dist);
+    if(dist>=DRAG_DEADZONE){
+      G.drag.x=p.x; G.drag.y=p.y; G.drag.vx=G.drag.vy=0;
+      drawGraph();
+    }
+    return;
+  }
+  const under = nodeAt(p.x,p.y,6);
+  cv.style.cursor = under ? 'grab' : 'default';
+  if((G.hover?G.hover.id:null) !== (under?under.id:null)){ G.hover=under; drawGraph(); }
+});
+
+// pointerup alone is not enough: releasing outside the canvas, or losing the
+// capture, used to leave G.drag set and that node frozen for good.
+['pointerup','pointercancel','lostpointercapture'].forEach(name=>{
+  $('#gCanvas').addEventListener(name, ()=>endDrag(true));
+});
+window.addEventListener('pointerup', ()=>endDrag(true));
+async function loadAccount(){
+  const g=$('#accGrid'), pg=$('#platGrid');
+  try{
+    const r=await fetch('/api/account'); const j=await r.json();
+    if(!j.ok){ g.innerHTML='<div class="mut">读取失败：'+esc(j.error)+'</div>'; return; }
+    accountCache=j;
+    const online=!!j.adapter_connected;
+    g.innerHTML=[
+      ['机器人 QQ', esc(j.qq||'未知')],
+      ['QQ 连接', online?'<span class="badge member">已连接</span>':'<span class="badge" style="color:#f0b429">未连接</span>'],
+      ['最近连接记录', '<span class="tiny mut">'+esc(j.adapter_last||'无记录')+'</span>'],
+      ['NapCat', esc(j.napcat||'未知')],
+      ['AstrBot', esc(j.astrbot||'未知')],
+      ['登录页端口', j.webui_port]
+    ].map(([k,v])=>'<div class="kv"><b>'+k+'</b>'+v+'</div>').join('');
+    pg.innerHTML=[['微信', j.wechat],['B 站', j.bilibili]]
+      .map(([k,v])=>'<div class="kv"><b>'+k+'</b>'+v+'</div>').join('');
+  }catch(e){ g.innerHTML='<div class="mut">读取失败：'+esc(e)+'</div>'; }
+}
+async function loadBili(){
+  try{
+    const r=await fetch('/api/bili'); const j=await r.json();
+    if(!j.ok){ $('#biliState').textContent='读取失败'; return; }
+    const bits=[];
+    bits.push(j.configured? '已保存 cookie':'未配置');
+    if(j.login) bits.push('登录：'+(j.name||'')+(' '+(j.uid||'')));
+    else if(j.configured) bits.push('登录失败：'+(j.error||'cookie 可能过期'));
+    bits.push(j.roam? '已允许逛 B 站':'未允许逛 B 站');
+    $('#biliState').textContent=bits.join('，');
+    $('#biliRoam').checked=!!j.roam;
+    if(j.owner_uid) $('#biliOwner').value=j.owner_uid;
+  }catch(e){ $('#biliState').textContent='读取失败：'+(e.message||e); }
+}
+$('#biliSave').onclick=async()=>{
+  const body={sessdata:$('#biliSess').value.trim(), bili_jct:$('#biliJct').value.trim(),
+              buvid3:$('#biliBuvid').value.trim(), owner_uid:$('#biliOwner').value.trim()};
+  if(!body.sessdata){ msg('SESSDATA 不能为空', true); return; }
+  const r=await fetch('/api/bili',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+  const j=await r.json();
+  if(!j.ok){ msg('保存失败：'+(j.error||''), true); return; }
+  $('#biliSess').value=''; $('#biliJct').value='';
+  msg(j.login? '已保存，登录成功：'+(j.name||'') : '已保存，但登录校验没通过：'+(j.error||''));
+  loadBili();
+};
+$('#biliRoam').onchange=async ev=>{
+  const r=await fetch('/api/bili',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({roam:ev.target.checked})});
+  const j=await r.json();
+  msg(j.ok? (ev.target.checked?'已允许自己去逛 B 站':'已收回，她只跟你私信'):'操作失败', !j.ok);
+  loadBili();
+};
+$('#loginBtn').onclick=async()=>{
+  $('#loginHint').textContent='正在建立隧道…';
+  const r=await fetch('/api/ops/tunnel',{method:'POST'}); const j=await r.json();
+  $('#loginHint').textContent = j.ok ? ('已打开 '+j.url) : ('失败：'+(j.error||''));
+};
+$('#tokenBtn').onclick=async()=>{
+  if(!accountCache) await loadAccount();
+  const t=(accountCache||{}).webui_token||'';
+  if(!t){ msg('没读到 token',true); return; }
+  try{ await navigator.clipboard.writeText(t); msg('token 已复制'); }
+  catch(e){ prompt('复制这个 token：', t); }
+};
+async function personaCall(payload){
+  const r=await fetch('/api/persona',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+  const j=await r.json(); if(j.ok===false){msg(j.error||'人格操作失败',true);throw new Error(j.error)} return j;
+}
+async function loadPersonas(){
+  const j=await personaCall({op:'list'});
+  $('#pSel').innerHTML=(j.items||[]).map(x=>'<option value="'+x.persona_id+'">'+x.persona_id+'，'+x.chars+'字</option>').join('');
+  await loadPersona();
+}
+async function loadPersona(){
+  const pid=$('#pSel').value; if(!pid) return;
+  const j=await personaCall({op:'get',persona_id:pid});
+  $('#pText').value=j.content||'';
+  $('#pInfo').textContent='当前 '+pid+'，'+((j.content||'').length)+' 字，更新于 '+j.updated_at;
+  $('#pVerList').innerHTML=(j.versions||[]).slice(0,8).map(v=>'<span class="badge" style="margin-right:6px">'+v+'</span>').join('')||'<span class="mut">还没有历史版本</span>';
+}
+$('#pLoad').onclick=loadPersona;
+$('#pSel').onchange=loadPersona;
+$('#pSave').onclick=async()=>{
+  const pid=$('#pSel').value, content=$('#pText').value;
+  if(!confirm('保存 '+pid+' 的新人格？旧版本会自动备份。')) return;
+  const j=await personaCall({op:'save',persona_id:pid,content,note:'控制台编辑'});
+  msg('已保存（'+j.chars+' 字），去运维页重启 AstrBot 生效');
+  await loadPersona();
+};
+$('#pTry').onclick=async()=>{
+  const pid=$('#pSel').value, content=$('#pText').value, message=$('#pMsg').value.trim();
+  if(!message){ msg('先写一句想试的话',true); return; }
+  const box=$('#pReply'); box.style.display='block'; box.textContent='试聊中…';
+  try{
+    const j=await personaCall({op:'preview',persona_id:pid,content,message});
+    box.textContent='【'+j.sec+' 秒】'+j.reply;
+  }catch(e){ box.textContent='试聊失败'; }
+};
+$('#pVersions').onclick=async()=>{
+  const pid=$('#pSel').value;
+  const j=await personaCall({op:'versions',persona_id:pid});
+  $('#pVerList').innerHTML=(j.items||[]).map(v=>'<div style="padding:3px 0">'+v.file+'，'+v.chars+'字，<span class="mut">'+esc(v.head)+'…</span></div>').join('')||'<span class="mut">没有历史版本</span>';
+};
+async function loadRecent(){
+  const r=await fetch('/api/ops/recent'); const j=await r.json();
+  $('#recentList').innerHTML = j.ok ? ((j.items||[]).map(x=>'<div style="padding:4px 0;border-bottom:1px solid var(--line)">'+esc(x)+'</div>').join('')||'<span class="mut">最近 6 小时没有回复</span>') : ('读取失败：'+esc(j.error));
+}
+$('#recentBtn').onclick=loadRecent;
+$('#backupBtn').onclick=async()=>{
+  $('#backupOut').textContent='备份中…';
+  const r=await fetch('/api/ops/backup',{method:'POST'}); const j=await r.json();
+  $('#backupOut').innerHTML = j.ok ? ('完成：'+esc(j.local)+'<br>SHA256 '+esc(j.sha256)+'<br>'+(j.bytes/1024).toFixed(0)+' KB') : ('失败：'+esc(j.error));
+};
+$('#healthBtn').onclick=async()=>{
+  $('#healthOut').textContent='体检中…';
+  try{
+    const j=await rpc(['health']);
+    const c=j.counts||{};
+    $('#healthOut').innerHTML=
+      '有效记忆 '+c.active+' 条，重复 '+c.duplicates+'，很久没提到 '+c.stale+
+      '，置信度低 '+c.low_confidence+'，偏长 '+c.too_long+'，可疑 '+c.suspicious+
+      ((c.suspicious||c.duplicates)?'<br><span style="color:#f0b429">可疑条目建议去「记忆」页看一眼</span>':'');
+  }catch(e){ $('#healthOut').textContent='失败：'+(e.message||e); }
+};
+$('#tidyBtn').onclick=async()=>{
+  $('#tidyOut').textContent='整理中…';
+  try{
+    const j=await rpc(['consolidate']);
+    $('#tidyOut').textContent='合并 '+j.merged+' 条，刷新 '+j.refined+' 个群，很久没提到 '+j.stale+' 条';
+  }catch(e){ $('#tidyOut').textContent='失败：'+(e.message||e); }
+};
+$('#restartBtn').onclick=async()=>{
+  if(!confirm('确定要重启 AstrBot 吗？期间约 30–40 秒不回复。')) return;
+  $('#restartOut').textContent='重启中…';
+  const r=await fetch('/api/ops/restart',{method:'POST'}); const j=await r.json();
+  $('#restartOut').textContent = j.ok ? ('已重启，启动时间 '+j.started_at) : ('失败：'+(j.error||''));
+};
+$('#addGroupBtn').onclick=async()=>{
+  const g=prompt('要登记的 QQ 群号（登记后需要在这里审核通过）'); if(!g) return;
+  await rpc(['register','--group',g.trim(),'--note','控制台登记']);
+  msg('已登记，等待审核');loadSpaces();
+};
+async function firstRunCheck(){
+  try{
+    const r=await fetch('/api/status'); const j=await r.json();
+    const b=$('#banner');
+    if(j.ok){ b.style.display='none'; return true; }
+    b.style.display='block'; b.textContent='连不上服务器：'+(j.error||'未知错误')+'。请先在 PowerShell 里跑 ssh -F D:/Jingjing/ssh/config oJingJing "echo ok" 确认能连。';
+    return false;
+  }catch(e){
+    const b=$('#banner'); b.style.display='block'; b.textContent='本地服务没响应：'+e;
+    return false;
+  }
+}
+$('#reload').onclick=loadMem;
+$('#reportBtn').onclick=async()=>{
+  const btn=$('#reportBtn'); btn.classList.add('loading'); $('#reportNote').textContent='统计中…';
+  try{
+    const r=await fetch('/api/ops/report',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({hours:24})});
+    const j=await r.json();
+    if(!j.ok){ $('#reportNote').textContent='失败：'+(j.error||''); return; }
+    const d=j.decisions||{}, m=j.memories||{}, lat=j.latency||{};
+    const p=lat.prepare_ms||{}, mo=lat.model_ms||{}, w=lat.wait_ms||{};
+    const fmt=x=>x? (x/1000).toFixed(1)+'s' : '-';
+    $('#reportGrid').innerHTML=[
+      ['收到消息', j.inbound],
+      ['回复', j.replies],
+      ['判定 回复/等待/退出/跳过', (d.REPLY||0)+' / '+(d.WAIT||0)+' / '+(d.EXIT||0)+' / '+(d.SKIP||0)],
+      ['准备耗时 中位/P90', fmt(p.median)+' / '+fmt(p.p90)],
+      ['模型耗时 中位/P90', fmt(mo.median)+' / '+fmt(mo.p90)],
+      ['等待 中位', fmt(w.median)],
+      ['新记忆（总结/关键词）', (m.from_summary||0)+' / '+(m.from_extract||0)],
+      ['敏感话题拦截', j.topic_blocked||0]
+    ].map(([k,v])=>'<div class="kv"><b>'+k+'</b>'+v+'</div>').join('');
+    const rs=j.reasons||{};
+    $('#reportNote').textContent='沉默原因：'+(Object.entries(rs).map(([k,v])=>k+' '+v).join('，')||'无');
+  }catch(e){ $('#reportNote').textContent='失败：'+(e.message||e); }
+  finally{ btn.classList.remove('loading'); }
+};
+$('#statReload').onclick=loadStatus;
+$('#quit').onclick=async()=>{await fetch('/api/quit',{method:'POST'});window.close()};
+setInterval(()=>fetch('/api/ping').catch(()=>{}), 2000);
+firstRunCheck().then(ok=>{ if(ok){ loadMem(); loadAutoMem(); } });
+loadPromo().catch(()=>{});
+</script>
+</body>
+</html>
