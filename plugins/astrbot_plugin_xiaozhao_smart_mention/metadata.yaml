@@ -1,0 +1,8 @@
+name: astrbot_plugin_xiaozhao_smart_mention
+desc: 群聊提到自定义关键词时，智能判断是否需要机器人自然回应
+short_desc: 自定义关键词智能提及回复
+version: 0.2.0
+author: zhao
+repo: "https://github.com/ZhaoJun233/astrbot_plugin_xiaozhao_smart_mention"
+display_name: 自定义关键词智能提及回复
+astrbot_version: ">=4.24.0"
