@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+*.sqlite3
+*.sqlite3-*
+*.log
+cookie.json
+backups/
+releases/
+plugin-backups/
+.venv/
+node_modules/
+.DS_Store
