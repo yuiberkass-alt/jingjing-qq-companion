@@ -1,0 +1,366 @@
+﻿{
+  "use_llm_judge": {
+    "description": "LLM 提及判定",
+    "hint": "规则无法明确判断时，调用当前模型判定是否回复。",
+    "type": "bool",
+    "default": true
+  },
+  "judge_timeout_sec": {
+    "description": "判定超时（秒）",
+    "hint": "智能判定模型单次调用的超时时间。",
+    "type": "int",
+    "default": 8
+  },
+  "active_reply_enabled": {
+    "description": "主动回复",
+    "hint": "启用普通群聊中未被点名时的智能主动回复。",
+    "type": "bool",
+    "default": true
+  },
+  "active_reply_cooldown_sec": {
+    "description": "主动回复冷却（秒）",
+    "hint": "同一会话内机器人主动回复后的冷却时间，避免连续抢话。",
+    "type": "int",
+    "default": 30
+  },
+  "input_context_enabled": {
+    "description": "聚合连续输入上下文",
+    "hint": "群聊或私聊中连续发送文字、图片时，回复前短暂等待并聚合当前输入；群聊仍会遵守对话对象和防抢话边界。",
+    "type": "bool",
+    "default": true
+  },
+  "input_context_wait_sec": {
+    "description": "连续输入等待（秒）",
+    "hint": "LLM 请求前最多等待多久收集后续补充分段。调大更容易吃到多条分段，但回复会更慢；设为 0 可关闭这层等待但仍注入已有上下文。",
+    "type": "float",
+    "default": 1.2
+  },
+  "input_context_debounce_enabled": {
+    "description": "连续输入防抢答",
+    "hint": "开启后，关键词、原生 @、回复机器人、私聊等触发回复前会先等待一个安静窗口；如果窗口内继续发言，则静默取消前一条，让最后一条带上下文统一触发回复。",
+    "type": "bool",
+    "default": true
+  },
+  "input_context_debounce_sec": {
+    "description": "防抢答安静窗口（秒）",
+    "hint": "用于判断群聊关键词或点名回复前是否还会继续补充。窗口内继续发言时，前一条会被静默取消，由最后一条带上下文统一触发回复；设得越大越不容易抢答，但回复越慢。",
+    "type": "float",
+    "default": 0.8
+  },
+  "private_input_debounce_sec": {
+    "description": "私聊防抢答安静窗口（秒）",
+    "hint": "私聊文字或图片回复前的安静窗口；连续发送时由最后一条聚合本轮文字和图片后统一回复。设得越大越不容易抢答，但首条回复越慢。",
+    "type": "float",
+    "default": 2.5
+  },
+  "input_context_limit": {
+    "description": "输入上下文条数",
+    "hint": "每次注入给模型的最近群消息条数上限。",
+    "type": "int",
+    "default": 8
+  },
+  "input_context_window_sec": {
+    "description": "输入上下文窗口（秒）",
+    "hint": "插件本地短期缓存群消息的时间窗口，只用于聚合连续分段输入；过期消息不会注入。",
+    "type": "float",
+    "default": 8.0
+  },
+  "natural_chat_style_enabled": {
+    "description": "自然群聊风格约束",
+    "hint": "插件触发或原生点名回复时追加自然群聊风格提醒：日常聊天可短段分段，列表、步骤、总结、配置说明时收束成紧凑回答。",
+    "type": "bool",
+    "default": true
+  },
+  "smart_segment_enabled": {
+    "description": "插件智能分段发送",
+    "hint": "AstrBot 全局分段关闭时，由插件在发送前调用当前模型判断自然分段，并拆成多条消息发送；结构化、技术、列表和非纯文本回复会保守跳过。",
+    "type": "bool",
+    "default": true
+  },
+  "smart_segment_use_model": {
+    "description": "使用当前模型分析分段",
+    "hint": "开启后才使用当前会话模型输出自然分段 JSON；默认关闭并使用本地分段，以减少延迟和 API 调用。",
+    "type": "bool",
+    "default": false
+  },
+  "smart_segment_model_timeout_sec": {
+    "description": "分段模型超时（秒）",
+    "hint": "插件智能分段单次模型分析最多等待多久；超时后直接使用本地分段，避免回复明显变慢。",
+    "type": "float",
+    "default": 2.0
+  },
+  "natural_rewrite_use_model": {
+    "description": "使用模型自然改写",
+    "hint": "开启后会在回复生成后再调用一次当前会话模型做自然化整理，效果更细但会增加一次模型等待。默认关闭，仅用本地规则清理动作描写、标题和基础分段。",
+    "type": "bool",
+    "default": false
+  },
+  "natural_rewrite_timeout_sec": {
+    "description": "自然改写模型超时（秒）",
+    "hint": "仅在使用模型自然改写时生效。超时后退回本地清理结果。",
+    "type": "float",
+    "default": 1.2
+  },
+  "smart_segment_respect_astrbot": {
+    "description": "避让 AstrBot 全局分段",
+    "hint": "开启后如果 AstrBot 自带分段回复已启用，插件不接管发送，避免重复分段；关闭后插件始终优先处理符合条件的纯文本模型回复。",
+    "type": "bool",
+    "default": true
+  },
+  "smart_segment_interval_sec": {
+    "description": "插件分段间隔（秒）",
+    "hint": "插件接管分段发送时，多条消息之间的基础间隔；实际会有少量随机浮动。设为 0 可关闭等待。",
+    "type": "float",
+    "default": 0.8
+  },
+  "action_output_enabled": {
+    "description": "允许动作描写输出",
+    "hint": "是否允许输出括号动作描写、舞台旁白或耳朵/尾巴/爪爪等动作。默认关闭；需要角色扮演时可开启。",
+    "type": "bool",
+    "default": false
+  },
+  "action_cleanup_review_use_model": {
+    "description": "使用模型质检动作清理",
+    "hint": "动作描写被本地规则删除后，是否额外调用当前会话模型做一次质检。默认关闭以减少延迟和 API 成本；本地清理仍然生效。",
+    "type": "bool",
+    "default": false
+  },
+  "natural_chat_max_sentences": {
+    "description": "自然分段安全上限",
+    "hint": "日常聊天由模型根据语气和信息密度自行判断分成几条；此项只限制最多短段/短句数量，避免刷屏。列表、步骤、总结、配置说明会收束成更紧凑的结构化回答。",
+    "type": "int",
+    "default": 3
+  },
+  "followup_reply_window_sec": {
+    "description": "续聊窗口（秒）",
+    "hint": "机器人刚回复某人后，同一群同一人未再点名但继续追问时，允许在该时间内接着回复；设为 0 可关闭。",
+    "type": "int",
+    "default": 180
+  },
+  "followup_llm_judge_enabled": {
+    "description": "模型判断续聊",
+    "hint": "开启后，本地会综合上一轮实际回复、是否在等回答、群聊轮次和插话情况评分，只在语义灰区交给当前模型判定。",
+    "type": "bool",
+    "default": true
+  },
+  "followup_score_threshold": {
+    "description": "续聊触发分数",
+    "hint": "固定规则评分触发续聊的阈值。达到该分数会直接续聊，不再请求模型；短反馈仍会被扣分拦截。",
+    "type": "int",
+    "default": 75
+  },
+  "followup_model_judge_min_score": {
+    "description": "模型续聊灰区下限",
+    "hint": "本地续聊评分低于该值会直接跳过，不请求模型，以节省成本。",
+    "type": "int",
+    "default": 35
+  },
+  "followup_model_judge_max_score": {
+    "description": "模型续聊灰区上限",
+    "hint": "具备有效语义信号且本地评分位于灰区时才请求模型；没有上下文语义的模糊短句不会因此调用模型。",
+    "type": "int",
+    "default": 70
+  },
+  "followup_model_weight": {
+    "description": "续聊模型加分",
+    "hint": "兼容旧评分路径的模型加分，保留给自定义权重使用。",
+    "type": "int",
+    "default": 30
+  },
+  "followup_max_auto_rounds": {
+    "description": "无唤醒续聊轮数",
+    "hint": "一次点名或关键词触发后，允许连续无唤醒词续聊的最多轮数；设为 0 不限制。",
+    "type": "int",
+    "default": 2
+  },
+  "followup_score_weights": {
+    "description": "续聊评分权重",
+    "hint": "JSON 格式的续聊打分项。除提问和追问线索外，还会考虑机器人上一句是否在等回答、是否紧接上一轮、以及中间是否有其他成员插话。",
+    "type": "string",
+    "default": "{\"same_sender_window\":20,\"explicit_followup_cue\":45,\"question_mark\":25,\"asks_bot_or_you\":25,\"mentions_previous_reply\":25,\"bot_invited_response\":55,\"immediate_turn\":20,\"other_sender_interrupt\":-30,\"short_ack\":-60,\"plain_statement\":-20,\"long_elapsed\":-25,\"model_reply\":30}"
+  },
+  "active_judge_attempt_cooldown_sec": {
+    "description": "主动判定间隔（秒）",
+    "hint": "无关键词普通群聊消息进入主动回复判定的最短间隔；无论最终是否回复，都会避免频繁请求模型。",
+    "type": "int",
+    "default": 45
+  },
+  "judge_failure_backoff_sec": {
+    "description": "判定失败退避（秒）",
+    "hint": "智能判定模型超时、429 或其他失败后的暂停时间；暂停期间跳过智能判定，避免继续打爆 provider。",
+    "type": "int",
+    "default": 120
+  },
+  "directed_reply_guard_enabled": {
+    "description": "点名防刷屏",
+    "hint": "启用原生 @、回复机器人、文字点名机器人的防刷屏冷却；开启后连续点名不会每条都触发模型回复。",
+    "type": "bool",
+    "default": true
+  },
+  "directed_reply_group_cooldown_sec": {
+    "description": "群点名冷却（秒）",
+    "hint": "同一群聊内点名机器人回复的全局冷却时间。",
+    "type": "int",
+    "default": 8
+  },
+  "directed_reply_sender_cooldown_sec": {
+    "description": "个人点名冷却（秒）",
+    "hint": "同一群聊内同一发送者点名机器人回复的冷却时间。",
+    "type": "int",
+    "default": 60
+  },
+  "directed_reply_owner_bypass": {
+    "description": "主人绕过点名冷却",
+    "hint": "主人是否绕过 @、回复机器人、文字点名机器人的防刷屏冷却。",
+    "type": "bool",
+    "default": true
+  },
+  "owner_ids": {
+    "description": "主人 ID 列表",
+    "hint": "用于主人身份识别和绕过点名防刷屏冷却。OneBot 填 QQ 数字号；QQ Official 填 member_openid/user_openid，不是 QQ 号。仓库默认留空，请在本机配置里填写自己的平台用户 ID。",
+    "type": "list",
+    "default": []
+  },
+  "owner_identity_prompt_enabled": {
+    "description": "注入主人身份提示",
+    "hint": "开启后，只要配置了 owner_ids，插件会在模型请求里明确告诉模型当前发言人是否为已确认主人；非 owner 即使自称主人也不会被承认。",
+    "type": "bool",
+    "default": true
+  },
+  "owner_display_name": {
+    "description": "主人称呼",
+    "hint": "模型确认当前发言人是 owner_ids 中的主人时，可自然使用的称呼；默认是“主人”。",
+    "type": "string",
+    "default": "主人"
+  },
+  "mention_keywords": {
+    "description": "提及关键词",
+    "hint": "群聊提到这些关键词时进入智能提及判断；可填写机器人昵称、别名或其他唤醒称呼。",
+    "type": "list",
+    "default": [
+      "小昭",
+      "小昭猫娘"
+    ]
+  },
+  "aliases": {
+    "description": "旧版别名",
+    "hint": "旧版兼容项：触发别名列表；新配置请优先使用 mention_keywords。",
+    "type": "list",
+    "default": [
+      "小昭",
+      "小昭猫娘"
+    ]
+  },
+  "followup_reply_cue_patterns": {
+    "description": "续聊提示规则",
+    "hint": "续聊窗口内判断同一人未点名消息是否像追问、纠正或要求继续回答；普通闲聊不会仅因窗口存在而触发。",
+    "type": "list",
+    "default": [
+      "[?？]",
+      "(?:告诉我|直接说|直说|回答|继续|接着|就行|没事|好奇|问问)",
+      "(?:评价|锐评|分析|解释|总结|讲讲|说说|聊聊|展开|展开说说)(?:一下)?",
+      "(?:你觉得|你认为|你猜|猜一下|选一个|到底|所以|那你|那么)",
+      "(?:说你呢|叫你呢|问你呢|跟你说|和你说)",
+      "(?:不是|不对|我是说|我问的是|别绕|别跑题|刚才|上一句)"
+    ]
+  },
+  "group_handoff_enabled": {
+    "description": "鲸鲸：跨群友续聊（实验）",
+    "hint": "默认关闭；仅在下方指定测试群中，在机器人刚回复后让其他群友通过模型判定接力续聊。不会启用跨群检索。",
+    "type": "bool",
+    "default": false
+  },
+  "group_handoff_group_ids": {
+    "description": "鲸鲸：跨人续聊测试群号",
+    "hint": "必须填QQ群数字群号，例如 <GROUP_ID>；空列表一律不触发。不要填公开生产群。",
+    "type": "list",
+    "default": []
+  },
+  "group_handoff_window_sec": {
+    "description": "鲸鲸：多人话题接力窗口（秒）",
+    "type": "int",
+    "default": 90
+  },
+  "group_handoff_cooldown_sec": {
+    "description": "鲸鲸：跨人回复冷却（秒）",
+    "type": "int",
+    "default": 8
+  },
+  "group_handoff_judge_interval_sec": {
+    "description": "鲸鲸：多人判定间隔（秒）",
+    "hint": "同一群多久允许发起一次额外的模型判定；会增加少量 DeepSeek API 消耗。",
+    "type": "int",
+    "default": 12
+  },
+  "group_handoff_max_rounds": {
+    "description": "鲸鲸：连续跨人接力上限",
+    "type": "int",
+    "default": 2
+  },
+  "jj_semantic_enabled": {
+    "description": "鲸鲸 v0.3｜自主语义接话",
+    "hint": "测试版默认关闭。启用后仅对下方白名单群按 DeepSeek REPLY/WAIT/EXIT 处理，不再受旧关键词评分主导；明确@仍保持原有处理。",
+    "type": "bool",
+    "default": false
+  },
+  "jj_semantic_group_ids": {
+    "description": "鲸鲸 v0.3｜测试群白名单",
+    "hint": "先只填 <GROUP_ID>。空列表时新语义模式不生效。",
+    "type": "list",
+    "default": []
+  },
+  "jj_semantic_window_sec": {
+    "description": "鲸鲸 v0.3｜话题存活（秒）",
+    "type": "int",
+    "default": 90
+  },
+  "jj_semantic_max_rounds": {
+    "description": "鲸鲸 v0.3｜话题自动连续回复上限",
+    "hint": "防刷屏保护，默认6轮，再次明确@会重置。",
+    "type": "int",
+    "default": 6
+  },
+  "jj_semantic_judge_gap_sec": {
+    "description": "鲸鲸 v0.3｜活跃话题模型判定间隔（秒）",
+    "hint": "每群节流，降低API消耗，默认6秒。",
+    "type": "float",
+    "default": 6.0
+  },
+  "jj_semantic_cold_judge_gap_sec": {
+    "description": "鲸鲸 v0.3｜潜水期判定间隔（秒）",
+    "hint": "没有活跃话题时，低频考虑是否自然加入群聊，默认45秒。",
+    "type": "float",
+    "default": 45.0
+  },
+  "jj_semantic_min_delay_sec": {
+    "description": "鲸鲸 v0.3｜额外回复等待下限（秒）",
+    "hint": "默认0，不添加等待。后续可以与上限设成3和20，但会让回复更慢。",
+    "type": "float",
+    "default": 0.0
+  },
+  "jj_semantic_max_delay_sec": {
+    "description": "鲸鲸 v0.3｜额外回复等待上限（秒）",
+    "hint": "默认0，关闭。开启后若有新群消息，旧回复会被取消防止过时刷屏，最大限制20秒。",
+    "type": "float",
+    "default": 0.0
+  },
+  "jj_semantic_emoji_enabled": {
+    "description": "鲸鲸 v0.3｜自然Emoji",
+    "hint": "仅在本测试语义群启用，0~1个适时使用，不强制。",
+    "type": "bool",
+    "default": true
+  },
+  "jj_stickers_enabled": {
+    "description": "鲸鲸 v0.3｜本地审核表情包",
+    "hint": "默认关闭。需要先把经过同意使用的图片放到 /AstrBot/data/plugin_data/jingjing_stickers ，以英文文件名命名，再开启。",
+    "type": "bool",
+    "default": false
+  },
+  "jj_rhythm_v032_enabled": {
+    "description": "鲸鲸 v0.3.2｜新消息收拢后再判断（测试群）",
+    "hint": "默认关闭，不影响原版本。开启后须搭配额外回复延迟下限/上限，例如3秒和20秒。活跃话题额外等待通常不超过8秒；收到新群消息会让旧候选退让给最新消息。",
+    "type": "bool",
+    "default": false
+  }
+}
+
