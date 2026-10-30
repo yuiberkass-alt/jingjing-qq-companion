@@ -1,0 +1,12 @@
+{
+  "poll_interval_sec": {
+    "description": "B 站私信轮询间隔（秒）",
+    "type": "int",
+    "default": 30
+  },
+  "roam_interval_min": {
+    "description": "允许逛 B 站时，两次出去逛的最短间隔（分钟）",
+    "type": "int",
+    "default": 180
+  }
+}
