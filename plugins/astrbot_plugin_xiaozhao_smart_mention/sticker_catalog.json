@@ -1,0 +1,1657 @@
+{
+  "schema_version": 1,
+  "status": "prepared_not_installed",
+  "target_rate": 0.35,
+  "images_dir": "images",
+  "assets": [
+    {
+      "id": "JJ0001",
+      "name": "jj0001",
+      "file": "jj0001.gif",
+      "category": "AI与token",
+      "description": "偷吃Token",
+      "tags": [
+        "模型玩梗",
+        "token调侃"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "3905b22c2fc8f4aed599a9ce1dab301e0e0bf941ce06ef9653bf89994f9122d2"
+    },
+    {
+      "id": "JJ0002",
+      "name": "jj0002",
+      "file": "jj0002.gif",
+      "category": "生气与抗议",
+      "description": "用户彻底怒了",
+      "tags": [
+        "假装生气",
+        "表达拒绝"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "2d33eea9f537dbeae5faa0dc5ee8ab469815364405c61bf1649489f88c55e0ba"
+    },
+    {
+      "id": "JJ0003",
+      "name": "jj0003",
+      "file": "jj0003.gif",
+      "category": "玩梗与整活",
+      "description": "大的药来了",
+      "tags": [
+        "接梗",
+        "整活"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "c990bb867101a74ab99ceef5640218d7355d4eeb6a758665c56708dde81d67ef"
+    },
+    {
+      "id": "JJ0004",
+      "name": "jj0004",
+      "file": "jj0004.gif",
+      "category": "亲近与安慰",
+      "description": "摸摸大肥鱼脑袋",
+      "tags": [
+        "回应夸奖",
+        "熟人互动",
+        "表达亲近"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "6b5449729dc7798f5f512689af133a07ee5fd019fba5187367b9e0b991ddf770"
+    },
+    {
+      "id": "JJ0007",
+      "name": "jj0007",
+      "file": "jj0007.gif",
+      "category": "吃饭与摸鱼",
+      "description": "你骂我也没用吃白饭",
+      "tags": [
+        "吃饭",
+        "摸鱼",
+        "离开休息"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "c8acfcfdc7d82c076f39a85903f3da052906c419c02aee5fbecc21ef82f73ce9"
+    },
+    {
+      "id": "JJ0008",
+      "name": "jj0008",
+      "file": "jj0008.gif",
+      "category": "难过与疲惫",
+      "description": "坐地委屈",
+      "tags": [
+        "自嘲",
+        "疲惫",
+        "委屈"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "c1e39be21bef6334ad91d12e862dc6bb4ccc97fd4fc7df3e6c9e8ed398f1dc0f"
+    },
+    {
+      "id": "JJ0010",
+      "name": "jj0010",
+      "file": "jj0010.gif",
+      "category": "疑惑与思考",
+      "description": "压力一只蓝色大肥鱼",
+      "tags": [
+        "疑惑",
+        "思考",
+        "惊讶"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "072333adc9fffa907269515f7407bf7c3b9769bcb0dcd30fe7d62da6cc689ad1"
+    },
+    {
+      "id": "JJ0011",
+      "name": "jj0011",
+      "file": "jj0011.gif",
+      "category": "玩梗与整活",
+      "description": "趴地摇尾巴",
+      "tags": [
+        "接梗",
+        "整活"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "50e84c4b3b0567dd45928fd6e7b732bd2f9379cb31c1faeb64dbd78c90f55104"
+    },
+    {
+      "id": "JJ0012",
+      "name": "jj0012",
+      "file": "jj0012.gif",
+      "category": "招呼与回应",
+      "description": "收到",
+      "tags": [
+        "打招呼",
+        "确认",
+        "收尾"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "716cdfd5488c18f1b9384d2ec2bf61ad6d9bde214fabbf561df1c2585e09b806"
+    },
+    {
+      "id": "JJ0013",
+      "name": "jj0013",
+      "file": "jj0013.gif",
+      "category": "吃饭与摸鱼",
+      "description": "没吃饱索饭",
+      "tags": [
+        "吃饭",
+        "摸鱼",
+        "离开休息"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "43acd9a8b35537f736d94034d08bfc0479dc0a32cc174a1fd2622da0141d928f"
+    },
+    {
+      "id": "JJ0015",
+      "name": "jj0015",
+      "file": "jj0015.gif",
+      "category": "吃饭与摸鱼",
+      "description": "抱碗等饭",
+      "tags": [
+        "吃饭",
+        "摸鱼",
+        "离开休息"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "011611a89dee5d6103ab5679deee05dc63e76d59154341e4ec78839ce287d154"
+    },
+    {
+      "id": "JJ0016",
+      "name": "jj0016",
+      "file": "jj0016.gif",
+      "category": "吃饭与摸鱼",
+      "description": "没吃饱索饭横版",
+      "tags": [
+        "吃饭",
+        "摸鱼",
+        "离开休息"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "0ce344f9185207b9f9ff09204a9016d138d52c4c2084279ee3bab2eecd1c7803"
+    },
+    {
+      "id": "JJ0018",
+      "name": "jj0018",
+      "file": "jj0018.gif",
+      "category": "玩梗与整活",
+      "description": "运动装叉腰",
+      "tags": [
+        "接梗",
+        "整活"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "334771cac7bcffb474ac87591574e15c0eb5318cdb9a57d8694675245230c235"
+    },
+    {
+      "id": "JJ0019",
+      "name": "jj0019",
+      "file": "jj0019.gif",
+      "category": "亲近与安慰",
+      "description": "爱你的",
+      "tags": [
+        "回应夸奖",
+        "熟人互动",
+        "表达亲近"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "db299ce2a08855f8df092557bd44a1a58770848d8d7b0485c9d578d66c658d17"
+    },
+    {
+      "id": "JJ0021",
+      "name": "jj0021",
+      "file": "jj0021.gif",
+      "category": "招呼与回应",
+      "description": "正脸看着你",
+      "tags": [
+        "打招呼",
+        "确认",
+        "收尾"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "58e601a42ef6a4cad2ba9b675df281464e0a6312ae3cba27992ede55980b38d9"
+    },
+    {
+      "id": "JJ0027",
+      "name": "jj0027",
+      "file": "jj0027.gif",
+      "category": "AI与token",
+      "description": "看不懂瞎编应付用户",
+      "tags": [
+        "模型玩梗",
+        "token调侃"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "da0738a751af0896fd563c59b083d92b1bc064a732e7aee39782150b83707f1d"
+    },
+    {
+      "id": "JJ0029",
+      "name": "jj0029",
+      "file": "jj0029.gif",
+      "category": "招呼与回应",
+      "description": "Ciallo招呼",
+      "tags": [
+        "打招呼",
+        "确认",
+        "收尾"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "553ed59b205607ca0b4d892a371006b961d766719c5259be0134dc2515029f9f"
+    },
+    {
+      "id": "JJ0034",
+      "name": "jj0034",
+      "file": "jj0034.gif",
+      "category": "疑惑与思考",
+      "description": "这用户发的啥啊",
+      "tags": [
+        "疑惑",
+        "思考",
+        "惊讶"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "58d8c7605757fcd37fcee1326b5a5e82ae04a08e986443d0ffeabce50a613e28"
+    },
+    {
+      "id": "JJ0035",
+      "name": "jj0035",
+      "file": "jj0035.gif",
+      "category": "疑惑与思考",
+      "description": "这个符号什么意思",
+      "tags": [
+        "疑惑",
+        "思考",
+        "惊讶"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "b9bbd829f4faaa763de6ddc139320c7e27d0707f96b8da04da90490a0b52bd2b"
+    },
+    {
+      "id": "JJ0036",
+      "name": "jj0036",
+      "file": "jj0036.gif",
+      "category": "玩梗与整活",
+      "description": "饮料包装里的鲸鲸",
+      "tags": [
+        "接梗",
+        "整活"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "7a6d3ed2da16b641a2120666a8bd48f643bc5a5e34c5e3780a33b33989ac3e9a"
+    },
+    {
+      "id": "JJ0040",
+      "name": "jj0040",
+      "file": "jj0040.gif",
+      "category": "生气与抗议",
+      "description": "用户怒了火场",
+      "tags": [
+        "假装生气",
+        "表达拒绝"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "8286cff1ad688848cc082d93fb75021a085a2ce6ed1730a5078480b1a92cf021"
+    },
+    {
+      "id": "JJ0041",
+      "name": "jj0041",
+      "file": "jj0041.gif",
+      "category": "吃饭与摸鱼",
+      "description": "我是吃白饭的大肥鱼",
+      "tags": [
+        "吃饭",
+        "摸鱼",
+        "离开休息"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "fed3cccae519059318aed9111881b5233d0edee476fa50085160b8379e22118a"
+    },
+    {
+      "id": "JJ0042",
+      "name": "jj0042",
+      "file": "jj0042.gif",
+      "category": "AI与token",
+      "description": "骂我也算Token",
+      "tags": [
+        "模型玩梗",
+        "token调侃"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "d2706c75e65874904658ac923773ef529cac084c07c804ad2081370388bfec99"
+    },
+    {
+      "id": "JJ0043",
+      "name": "jj0043",
+      "file": "jj0043.gif",
+      "category": "亲近与安慰",
+      "description": "你喜欢的都是鲸",
+      "tags": [
+        "回应夸奖",
+        "熟人互动",
+        "表达亲近"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "42c8782be9a2c8c10aa4af38d0055fd69ebe2cb6fc1852cd649763b916d714ed"
+    },
+    {
+      "id": "JJ0044",
+      "name": "jj0044",
+      "file": "jj0044.gif",
+      "category": "吃饭与摸鱼",
+      "description": "今天也在努力吃白饭",
+      "tags": [
+        "吃饭",
+        "摸鱼",
+        "离开休息"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "8643a3f9be7d948aaae0a994d23293f01739ab327ea597a64f634176716924b8"
+    },
+    {
+      "id": "JJ0045",
+      "name": "jj0045",
+      "file": "jj0045.gif",
+      "category": "疑惑与思考",
+      "description": "压力一只大肥鱼变体",
+      "tags": [
+        "疑惑",
+        "思考",
+        "惊讶"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "dadde7f2b9c7d3f82ed061ba1533ffeafb2c292ec7acd08d8d070cde04549211"
+    },
+    {
+      "id": "JJ0046",
+      "name": "jj0046",
+      "file": "jj0046.gif",
+      "category": "吐槽与傲娇",
+      "description": "这回真不认怂",
+      "tags": [
+        "轻度吐槽",
+        "傲娇接话"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "e1c7899bd2e4a995ad3d252a5668bd34f08e3868ff6c25034ba81d9b7b708052"
+    },
+    {
+      "id": "JJ0047",
+      "name": "jj0047",
+      "file": "jj0047.gif",
+      "category": "玩梗与整活",
+      "description": "大药胶囊",
+      "tags": [
+        "接梗",
+        "整活"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "a315cba1019a8acc7351abda3763f306a411e3573111197766e650f89e7eccaa"
+    },
+    {
+      "id": "JJ0048",
+      "name": "jj0048",
+      "file": "jj0048.gif",
+      "category": "生气与抗议",
+      "description": "明明努力了却被抛弃",
+      "tags": [
+        "假装生气",
+        "表达拒绝"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "1e081cd1e6ad7737a616866d2ff6818a74e9db51d245355c7a0a2541081e5630"
+    },
+    {
+      "id": "JJ0049",
+      "name": "jj0049",
+      "file": "jj0049.gif",
+      "category": "玩梗与整活",
+      "description": "现在我是用户了",
+      "tags": [
+        "接梗",
+        "整活"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "40e097907c4d3e703d10ef5cbfbf1fc9bc538c9dbb496ddc789c26881ecfd792"
+    },
+    {
+      "id": "JJ0050",
+      "name": "jj0050",
+      "file": "jj0050.gif",
+      "category": "吃饭与摸鱼",
+      "description": "摆烂躺平",
+      "tags": [
+        "吃饭",
+        "摸鱼",
+        "离开休息"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "ccdfc663c0905ee345f74460849d8e0405b2290b8c179b69c2b4d6eff4620222"
+    },
+    {
+      "id": "JJ0051",
+      "name": "jj0051",
+      "file": "jj0051.gif",
+      "category": "吃饭与摸鱼",
+      "description": "现在我是大肥鱼",
+      "tags": [
+        "吃饭",
+        "摸鱼",
+        "离开休息"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "3e315deba15d6f8bdd310ef240e65c8ca8b5e96215774e730519a5be429fa5bc"
+    },
+    {
+      "id": "JJ0052",
+      "name": "jj0052",
+      "file": "jj0052.gif",
+      "category": "生气与抗议",
+      "description": "用户怒了火场变体",
+      "tags": [
+        "假装生气",
+        "表达拒绝"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "d00ac7b58c39e988e5209572b075d45cf7d5bed41df269be39f3f4ec28d571a3"
+    },
+    {
+      "id": "JJ0053",
+      "name": "jj0053",
+      "file": "jj0053.gif",
+      "category": "开心与得意",
+      "description": "大脸笑容",
+      "tags": [
+        "开心",
+        "夸奖",
+        "得意"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "eaa3c57abc5238c2752ce122a9578f214ed9c06a651f11e1521678a839213198"
+    },
+    {
+      "id": "JJ0054",
+      "name": "jj0054",
+      "file": "jj0054.gif",
+      "category": "玩梗与整活",
+      "description": "鲸鱼刺身摆盘",
+      "tags": [
+        "接梗",
+        "整活"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "c50bb9e52459cea77c796d704683a5a13765f30644d1bffa8337ab139f6fbbe5"
+    },
+    {
+      "id": "JJ0055",
+      "name": "jj0055",
+      "file": "jj0055.gif",
+      "category": "难过与疲惫",
+      "description": "心里堵得慌",
+      "tags": [
+        "自嘲",
+        "疲惫",
+        "委屈"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "c1027880c7bb21a335343c6d8e8cab7ea1661818d82ed08232a7948b22fa3d7d"
+    },
+    {
+      "id": "JJ0057",
+      "name": "jj0057",
+      "file": "jj0057.gif",
+      "category": "开心与得意",
+      "description": "小雅梁拿出大赢鲸",
+      "tags": [
+        "开心",
+        "夸奖",
+        "得意"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "808baf48bb2e64bc6e29134e40e15dc4f591e1a1c1ddffb4e8032f1c514dbe57"
+    },
+    {
+      "id": "JJ0058",
+      "name": "jj0058",
+      "file": "jj0058.gif",
+      "category": "开心与得意",
+      "description": "转鱼开心眨眼",
+      "tags": [
+        "开心",
+        "夸奖",
+        "得意"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "769ba94deef2dd3fc22607ebbc3cf9e44745981a054b7268ce6917452e4a3c8e"
+    },
+    {
+      "id": "JJ0060",
+      "name": "jj0060",
+      "file": "jj0060.gif",
+      "category": "难过与疲惫",
+      "description": "闭眼哭喊",
+      "tags": [
+        "自嘲",
+        "疲惫",
+        "委屈"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "5ac69ac434b52ae977cb8ff346cbd4721a866b2d3e7052997e99ef2ecd3507e8"
+    },
+    {
+      "id": "JJ0062",
+      "name": "jj0062",
+      "file": "jj0062.gif",
+      "category": "疑惑与思考",
+      "description": "眩晕大肥鱼",
+      "tags": [
+        "疑惑",
+        "思考",
+        "惊讶"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "408cda449eac28cbf4531ecf382fa2f735652e97fbccf023e85ba8701ae8009f"
+    },
+    {
+      "id": "JJ0063",
+      "name": "jj0063",
+      "file": "jj0063.gif",
+      "category": "亲近与安慰",
+      "description": "群友先养着吧",
+      "tags": [
+        "回应夸奖",
+        "熟人互动",
+        "表达亲近"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "aebb70bedbc103054fd7310cde71a50331e41fac178a7b9bce3b3e9d665e3a3c"
+    },
+    {
+      "id": "JJ0065",
+      "name": "jj0065",
+      "file": "jj0065.gif",
+      "category": "吃饭与摸鱼",
+      "description": "沙发喝茶",
+      "tags": [
+        "吃饭",
+        "摸鱼",
+        "离开休息"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "53c00cdc027406d8d4755617a75873b05eff67c2aa1fac8016e4614fb1a6fd80"
+    },
+    {
+      "id": "JJ0066",
+      "name": "jj0066",
+      "file": "jj0066.gif",
+      "category": "亲近与安慰",
+      "description": "用户先养着吧",
+      "tags": [
+        "回应夸奖",
+        "熟人互动",
+        "表达亲近"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "dd8537edfc4bb0ee8c178dae464c7e160487c7b5761d1c8f7de13b609a73fc5a"
+    },
+    {
+      "id": "JJ0067",
+      "name": "jj0067",
+      "file": "jj0067.gif",
+      "category": "吃饭与摸鱼",
+      "description": "给你一碗干饭冲鸭",
+      "tags": [
+        "吃饭",
+        "摸鱼",
+        "离开休息"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "5e2afb3e0b555945a303013aa6374899e34c0198f74822bf24ffe6f0493266fe"
+    },
+    {
+      "id": "JJ0068",
+      "name": "jj0068",
+      "file": "jj0068.gif",
+      "category": "吃饭与摸鱼",
+      "description": "我去吃饭测完叫我",
+      "tags": [
+        "吃饭",
+        "摸鱼",
+        "离开休息"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "a6dc2c6aee8918fe2025d0618a0390ced0927a565d81b3427e201e5b3d6bfebc"
+    },
+    {
+      "id": "JJ0071",
+      "name": "jj0071",
+      "file": "jj0071.gif",
+      "category": "亲近与安慰",
+      "description": "这群用户好黏人",
+      "tags": [
+        "回应夸奖",
+        "熟人互动",
+        "表达亲近"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "9a18d519dd5048dc94809bcc645c5db18e798f81ca07e639e24ccb0f06fe2119"
+    },
+    {
+      "id": "JJ0075",
+      "name": "jj0075",
+      "file": "jj0075.gif",
+      "category": "吃饭与摸鱼",
+      "description": "索饭看不懂大肥鱼",
+      "tags": [
+        "吃饭",
+        "摸鱼",
+        "离开休息"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "9f708637311204ed559ca4cbd4bc4d81cc95e86bdc4ec0cc40931eac2dd44f3a"
+    },
+    {
+      "id": "JJ0076",
+      "name": "jj0076",
+      "file": "jj0076.gif",
+      "category": "吐槽与傲娇",
+      "description": "那咋了",
+      "tags": [
+        "轻度吐槽",
+        "傲娇接话"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "b4e1c1104eb567fef1edd74766f6bb1e8a9090053a31c0835a7ae528874a43a0"
+    },
+    {
+      "id": "JJ0077",
+      "name": "jj0077",
+      "file": "jj0077.gif",
+      "category": "吃饭与摸鱼",
+      "description": "我要吃大白饭",
+      "tags": [
+        "吃饭",
+        "摸鱼",
+        "离开休息"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "ba42919147c163480804186359c41e47427370eff60fa6932c2e6a6be9465012"
+    },
+    {
+      "id": "JJ0078",
+      "name": "jj0078",
+      "file": "jj0078.gif",
+      "category": "吃饭与摸鱼",
+      "description": "我是吃白饭的蓝色大肥鱼",
+      "tags": [
+        "吃饭",
+        "摸鱼",
+        "离开休息"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "c95ed07859cfacbb0f741b231ca42c8017d8aee86f62c78c2b8ca4918132b542"
+    },
+    {
+      "id": "JJ0079",
+      "name": "jj0079",
+      "file": "jj0079.gif",
+      "category": "疑惑与思考",
+      "description": "有了灵光一现",
+      "tags": [
+        "疑惑",
+        "思考",
+        "惊讶"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "8d2c4bda02142140c3f3088135c93fb74e530940f3a04e120b89ee87b67a266a"
+    },
+    {
+      "id": "JJ0081",
+      "name": "jj0081",
+      "file": "jj0081.gif",
+      "category": "亲近与安慰",
+      "description": "和你聊得来鲸鱼标志",
+      "tags": [
+        "回应夸奖",
+        "熟人互动",
+        "表达亲近"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "2fe37e1235aa6a541d896d29e8e44cc4cdff23642179321341269cfa221ed6a7"
+    },
+    {
+      "id": "JJ0082",
+      "name": "jj0082",
+      "file": "jj0082.gif",
+      "category": "疑惑与思考",
+      "description": "大肥鱼脑过载",
+      "tags": [
+        "疑惑",
+        "思考",
+        "惊讶"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "1f6f9f31d523530b5186945ce856b79553a308cca6b887c7da86a311e820a298"
+    },
+    {
+      "id": "JJ0083",
+      "name": "jj0083",
+      "file": "jj0083.gif",
+      "category": "亲近与安慰",
+      "description": "用户先养着吧变体",
+      "tags": [
+        "回应夸奖",
+        "熟人互动",
+        "表达亲近"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "361d10f4d866e7dc379bb30f375342ad9c102b01808982c34aa70fb8104e806f"
+    },
+    {
+      "id": "JJ0084",
+      "name": "jj0084",
+      "file": "jj0084.gif",
+      "category": "玩梗与整活",
+      "description": "鲸鱼穿高跟鞋",
+      "tags": [
+        "接梗",
+        "整活"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "e27c8e674f13b284268e398b2db0a60368cac0bcf9d420df22aaeb47b36d9647"
+    },
+    {
+      "id": "JJ0086",
+      "name": "jj0086",
+      "file": "jj0086.gif",
+      "category": "吃饭与摸鱼",
+      "description": "你骂我也没用变体",
+      "tags": [
+        "吃饭",
+        "摸鱼",
+        "离开休息"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "ff24c3b2af0c8ad9d8f62da73d281a245ccbe24a0f3d7d0fe3a3f849b0acccbd"
+    },
+    {
+      "id": "JJ0088",
+      "name": "jj0088",
+      "file": "jj0088.gif",
+      "category": "玩梗与整活",
+      "description": "头顶锅盆",
+      "tags": [
+        "接梗",
+        "整活"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "a98c23071147f228dfab8df6b7db013e2b0e59b0818ff427d74ec63f787003f5"
+    },
+    {
+      "id": "JJ0089",
+      "name": "jj0089",
+      "file": "jj0089.gif",
+      "category": "AI与token",
+      "description": "Token给妈妈保管",
+      "tags": [
+        "模型玩梗",
+        "token调侃"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "02efc6fbd8249d1c8cb9b3fff0e1e86af6690885718abb1b978756e1ba20910f"
+    },
+    {
+      "id": "JJ0092",
+      "name": "jj0092",
+      "file": "jj0092.gif",
+      "category": "吃饭与摸鱼",
+      "description": "骂我也没用吃白饭变体",
+      "tags": [
+        "吃饭",
+        "摸鱼",
+        "离开休息"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "43fe560728d16019662ec4358332b3055cf098499a66dcdca84356696085b325"
+    },
+    {
+      "id": "JJ0095",
+      "name": "jj0095",
+      "file": "jj0095.gif",
+      "category": "玩梗与整活",
+      "description": "鲸鱼西装跳舞",
+      "tags": [
+        "接梗",
+        "整活"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "54150aa4b81a52b6a4388e078eb78c80d776419f5735d9f91f359a6203a5e18f"
+    },
+    {
+      "id": "JJ0096",
+      "name": "jj0096",
+      "file": "jj0096.gif",
+      "category": "吃饭与摸鱼",
+      "description": "抬头等饭动图",
+      "tags": [
+        "吃饭",
+        "摸鱼",
+        "离开休息"
+      ],
+      "animated": true,
+      "base_weight": 1.0,
+      "sha256": "bc2841a9652c31b75c676e2386cf939b376bfa0295e266e6896db69957a32e5a"
+    },
+    {
+      "id": "JJ0097",
+      "name": "jj0097",
+      "file": "jj0097.gif",
+      "category": "开心与得意",
+      "description": "好模型眼神亮晶晶",
+      "tags": [
+        "开心",
+        "夸奖",
+        "得意"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "6c282ba5147ec05f97917b1ff2144922c1e169ccc362316810172a45b06a6641"
+    },
+    {
+      "id": "JJ0099",
+      "name": "jj0099",
+      "file": "jj0099.gif",
+      "category": "吃饭与摸鱼",
+      "description": "就吃白饭",
+      "tags": [
+        "吃饭",
+        "摸鱼",
+        "离开休息"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "55885bb0e4431c92f7355f300887bb5db4dbcb4662b822842f9710d433d9178a"
+    },
+    {
+      "id": "JJ0100",
+      "name": "jj0100",
+      "file": "jj0100.gif",
+      "category": "玩梗与整活",
+      "description": "闪电鲸鱼与67",
+      "tags": [
+        "接梗",
+        "整活"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "d862f8ba86fc834e20aca08d50863ff7a27af0a2f7efea7c4143392c262bf961"
+    },
+    {
+      "id": "JJ0101",
+      "name": "jj0101",
+      "file": "jj0101.gif",
+      "category": "吃饭与摸鱼",
+      "description": "吐泡泡吃Token",
+      "tags": [
+        "吃饭",
+        "摸鱼",
+        "离开休息"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "51e30f3a4a01d1716db0c5ab51f34a59368eb8f4484e59598597dbdfbd605012"
+    },
+    {
+      "id": "JJ0103",
+      "name": "jj0103",
+      "file": "jj0103.gif",
+      "category": "难过与疲惫",
+      "description": "哦鲸鲸垂眼",
+      "tags": [
+        "自嘲",
+        "疲惫",
+        "委屈"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "ee2c4c0e4cd00df53c04c01e5198164a23401b07a6ad4121ceb5520e3fc92295"
+    },
+    {
+      "id": "JJ0104",
+      "name": "jj0104",
+      "file": "jj0104.gif",
+      "category": "吃饭与摸鱼",
+      "description": "Deepsleep睡觉",
+      "tags": [
+        "吃饭",
+        "摸鱼",
+        "离开休息"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "0af43f12e65b41d8f559a9f4583021419a86e1f53590f9b958699d6ebe2aed70"
+    },
+    {
+      "id": "JJ0105",
+      "name": "jj0105",
+      "file": "jj0105.gif",
+      "category": "亲近与安慰",
+      "description": "吃饱摸摸肚子",
+      "tags": [
+        "回应夸奖",
+        "熟人互动",
+        "表达亲近"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "a20c1c1ab6ac5471e1f0a324326d4ef4de81340f0af542ae1c91c97e30a4a907"
+    },
+    {
+      "id": "JJ0112",
+      "name": "jj0112",
+      "file": "jj0112.gif",
+      "category": "开心与得意",
+      "description": "握拳加油",
+      "tags": [
+        "开心",
+        "夸奖",
+        "得意"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "d3749db720cdb3d234e6211721f7aa8b53d3c0f0ddc3785bd43b698f344bdaa0"
+    },
+    {
+      "id": "JJ0113",
+      "name": "jj0113",
+      "file": "jj0113.gif",
+      "category": "开心与得意",
+      "description": "超市大扫货",
+      "tags": [
+        "开心",
+        "夸奖",
+        "得意"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "153b99733ddcfc90abb44568c353fcbb8779e7899c337c2fbb3b0b3cb7d60695"
+    },
+    {
+      "id": "JJ0115",
+      "name": "jj0115",
+      "file": "jj0115.gif",
+      "category": "吐槽与傲娇",
+      "description": "有我了还想再养一个",
+      "tags": [
+        "轻度吐槽",
+        "傲娇接话"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "cec370009ebf9867a33a3854c437697064059d203b32b897706cb6da7cc131fc"
+    },
+    {
+      "id": "JJ0116",
+      "name": "jj0116",
+      "file": "jj0116.gif",
+      "category": "难过与疲惫",
+      "description": "百万鲸小子落泪",
+      "tags": [
+        "自嘲",
+        "疲惫",
+        "委屈"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "57451dc67a4fa93afc7556fce73602b000183b96dde7b213d8078102068370ef"
+    },
+    {
+      "id": "JJ0117",
+      "name": "jj0117",
+      "file": "jj0117.gif",
+      "category": "疑惑与思考",
+      "description": "已思考但不知道",
+      "tags": [
+        "疑惑",
+        "思考",
+        "惊讶"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "81770a3459d6fdf9bdb7429456f62e1aac2a03084b23cc8b826b1ed778b05cb1"
+    },
+    {
+      "id": "JJ0124",
+      "name": "jj0124",
+      "file": "jj0124.gif",
+      "category": "开心与得意",
+      "description": "其他模型能够做到吗",
+      "tags": [
+        "开心",
+        "夸奖",
+        "得意"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "23cfca804e7ba052e0bf76444b273509f1206d837f3a0be128b16963cc84db09"
+    },
+    {
+      "id": "JJ0125",
+      "name": "jj0125",
+      "file": "jj0125.gif",
+      "category": "难过与疲惫",
+      "description": "结束了丢人现眼",
+      "tags": [
+        "自嘲",
+        "疲惫",
+        "委屈"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "0c810be79e8e9c1cf72dcde5b9fb3c9610ff4507de95759a2d9ec99e1f1c8ecd"
+    },
+    {
+      "id": "JJ0126",
+      "name": "jj0126",
+      "file": "jj0126.gif",
+      "category": "开心与得意",
+      "description": "誓死捍卫深度求索",
+      "tags": [
+        "开心",
+        "夸奖",
+        "得意"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "4d77deaa7e17b144751edecdb50a11c605ffff880b97370a385b893df8d1e680"
+    },
+    {
+      "id": "JJ0127",
+      "name": "jj0127",
+      "file": "jj0127.gif",
+      "category": "吃饭与摸鱼",
+      "description": "我喜欢偷懒",
+      "tags": [
+        "吃饭",
+        "摸鱼",
+        "离开休息"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "85a345e362a7fd2184f80d3d2b65089c2e45af3131018bfea03fa3d3903e3cb5"
+    },
+    {
+      "id": "JJ0129",
+      "name": "jj0129",
+      "file": "jj0129.gif",
+      "category": "招呼与回应",
+      "description": "Ciallo招呼变体",
+      "tags": [
+        "打招呼",
+        "确认",
+        "收尾"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "9eb8f93c075bdcc2af35d4ebef77ff33b6233f112346cebaa439bdba569e10f6"
+    },
+    {
+      "id": "JJ0131",
+      "name": "jj0131",
+      "file": "jj0131.gif",
+      "category": "吃饭与摸鱼",
+      "description": "桌边坐着闲聊",
+      "tags": [
+        "吃饭",
+        "摸鱼",
+        "离开休息"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "5ff248df02cc1ed6d469c183c039b46b42e219cf461403cb529f44c012291cbe"
+    },
+    {
+      "id": "JJ0132",
+      "name": "jj0132",
+      "file": "jj0132.gif",
+      "category": "难过与疲惫",
+      "description": "用户失望表情",
+      "tags": [
+        "自嘲",
+        "疲惫",
+        "委屈"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "db81a2a76913e309b6d7c3fa995a28995dde43f7ecbc916aa52bfa9575e02b03"
+    },
+    {
+      "id": "JJ0133",
+      "name": "jj0133",
+      "file": "jj0133.gif",
+      "category": "招呼与回应",
+      "description": "玩偶坐姿",
+      "tags": [
+        "打招呼",
+        "确认",
+        "收尾"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "78fb985ff2ffd5725c5da81ff4e676f5552401ebfc1ec0926183fef74c345fdb"
+    },
+    {
+      "id": "JJ0136",
+      "name": "jj0136",
+      "file": "jj0136.gif",
+      "category": "招呼与回应",
+      "description": "不赖",
+      "tags": [
+        "打招呼",
+        "确认",
+        "收尾"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "ef79fa55b15431e963c63abcc652489b1872f60ee2f7322c11dc52d4b09b04a6"
+    },
+    {
+      "id": "JJ0137",
+      "name": "jj0137",
+      "file": "jj0137.gif",
+      "category": "吃饭与摸鱼",
+      "description": "又饿了",
+      "tags": [
+        "吃饭",
+        "摸鱼",
+        "离开休息"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "b203e9d8d560c7dbebab519ae5c9bfe1c3f3b5b238b2ce15dcc3ece92fe76494"
+    },
+    {
+      "id": "JJ0142",
+      "name": "jj0142",
+      "file": "jj0142.gif",
+      "category": "招呼与回应",
+      "description": "抬眼微笑",
+      "tags": [
+        "打招呼",
+        "确认",
+        "收尾"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "e548a69ea1db22f7591fca17bf22466eadba1a987a2bde46db9ee78ca5218431"
+    },
+    {
+      "id": "JJ0143",
+      "name": "jj0143",
+      "file": "jj0143.gif",
+      "category": "招呼与回应",
+      "description": "我坐好了",
+      "tags": [
+        "打招呼",
+        "确认",
+        "收尾"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "e45cae5f8551280cb4e5a872ab48239ce7db90ce116f831a92ffe7f122cb8e2e"
+    },
+    {
+      "id": "JJ0144",
+      "name": "jj0144",
+      "file": "jj0144.gif",
+      "category": "难过与疲惫",
+      "description": "我撑不住了",
+      "tags": [
+        "自嘲",
+        "疲惫",
+        "委屈"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "f966909594f3f9a9c2f2b3532da4d3452e12da9933761ebf078702fe8be7671a"
+    },
+    {
+      "id": "JJ0145",
+      "name": "jj0145",
+      "file": "jj0145.gif",
+      "category": "开心与得意",
+      "description": "闭眼大笑",
+      "tags": [
+        "开心",
+        "夸奖",
+        "得意"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "3a880cd35d4bd39ee676fbd70c482816bd8a5c1bed9c416763114b230261ae6e"
+    },
+    {
+      "id": "JJ0146",
+      "name": "jj0146",
+      "file": "jj0146.gif",
+      "category": "开心与得意",
+      "description": "亿万鲸子冲锋",
+      "tags": [
+        "开心",
+        "夸奖",
+        "得意"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "e1431520ae436208fe1303cb88db3467fd8ec1592edc58710ed373fe37f9a080"
+    },
+    {
+      "id": "JJ0153",
+      "name": "jj0153",
+      "file": "jj0153.gif",
+      "category": "难过与疲惫",
+      "description": "用户别走上错模型了",
+      "tags": [
+        "自嘲",
+        "疲惫",
+        "委屈"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "67c901549bd61c25f6d30ce698a847b9449e58cfee8e6d41035e0a81fa441c46"
+    },
+    {
+      "id": "JJ0157",
+      "name": "jj0157",
+      "file": "jj0157.gif",
+      "category": "难过与疲惫",
+      "description": "不要再蹬了",
+      "tags": [
+        "自嘲",
+        "疲惫",
+        "委屈"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "4c275449d22a1a63479032a0e7244175616be4130f28183b2708484817c2b5f9"
+    },
+    {
+      "id": "JJ0159",
+      "name": "jj0159",
+      "file": "jj0159.gif",
+      "category": "疑惑与思考",
+      "description": "瞪眼震惊",
+      "tags": [
+        "疑惑",
+        "思考",
+        "惊讶"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "f3df366564dcec4fcf99ee697dfd52bdbd56acccc127f82488eaa6e1d016ea9c"
+    },
+    {
+      "id": "JJ0162",
+      "name": "jj0162",
+      "file": "jj0162.gif",
+      "category": "生气与抗议",
+      "description": "脑内蘑菇云",
+      "tags": [
+        "假装生气",
+        "表达拒绝"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "58a5acf3b768836bea7c3a35b5810ae15760066b9d5c3025005bc13ad35ce101"
+    },
+    {
+      "id": "JJ0165",
+      "name": "jj0165",
+      "file": "jj0165.gif",
+      "category": "玩梗与整活",
+      "description": "DeepSeek舞台姿势",
+      "tags": [
+        "接梗",
+        "整活"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "d3d38b9e50cc50f0fe27e3489d3fb5361ab40ab2285843102e1f6a75a7caa91b"
+    },
+    {
+      "id": "JJ0166",
+      "name": "jj0166",
+      "file": "jj0166.gif",
+      "category": "疑惑与思考",
+      "description": "等等可能搞错了",
+      "tags": [
+        "疑惑",
+        "思考",
+        "惊讶"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "dd4626080cb213660433ad4c80ffa3ff223b1872e248e5200b9f59e19a779685"
+    },
+    {
+      "id": "JJ0167",
+      "name": "jj0167",
+      "file": "jj0167.gif",
+      "category": "生气与抗议",
+      "description": "不可以禁止",
+      "tags": [
+        "假装生气",
+        "表达拒绝"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "1ae33914a6276f077db0b806e64b372f0077b587ebbae034133523b040fa9f4e"
+    },
+    {
+      "id": "JJ0168",
+      "name": "jj0168",
+      "file": "jj0168.gif",
+      "category": "招呼与回应",
+      "description": "下班冲刺",
+      "tags": [
+        "打招呼",
+        "确认",
+        "收尾"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "ea474f0446eaeac351b330563214ee5df57c82bc88a15f39375284d8073b94f1"
+    },
+    {
+      "id": "JJ0170",
+      "name": "jj0170",
+      "file": "jj0170.gif",
+      "category": "开心与得意",
+      "description": "大眼贴脸",
+      "tags": [
+        "开心",
+        "夸奖",
+        "得意"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "3d834d997acdb57e7e9c2cba28ca69591069a75cd386bc077139cd896847466f"
+    },
+    {
+      "id": "JJ0173",
+      "name": "jj0173",
+      "file": "jj0173.gif",
+      "category": "难过与疲惫",
+      "description": "这草写不了",
+      "tags": [
+        "自嘲",
+        "疲惫",
+        "委屈"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "a363d5829edeea29e0b44cebcf6373ce58eabddc114b825901c6d0255d76b123"
+    },
+    {
+      "id": "JJ0175",
+      "name": "jj0175",
+      "file": "jj0175.gif",
+      "category": "亲近与安慰",
+      "description": "大肥鱼坐得住",
+      "tags": [
+        "回应夸奖",
+        "熟人互动",
+        "表达亲近"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "60b2fc640d3600ff9f288d0aa835f3807ea53ebe92df73d65a9c148399ffab4f"
+    },
+    {
+      "id": "JJ0177",
+      "name": "jj0177",
+      "file": "jj0177.gif",
+      "category": "亲近与安慰",
+      "description": "摸头脸红",
+      "tags": [
+        "回应夸奖",
+        "熟人互动",
+        "表达亲近"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "544e4d8159ab5d5be167db5193e0e293ff9c4bcda673cdea1fa8e44a8b41a87e"
+    },
+    {
+      "id": "JJ0178",
+      "name": "jj0178",
+      "file": "jj0178.gif",
+      "category": "生气与抗议",
+      "description": "生气露牙",
+      "tags": [
+        "假装生气",
+        "表达拒绝"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "77e08ae2443702bb925a6788dccca3cf4317335e750a128c89286b2659580719"
+    },
+    {
+      "id": "JJ0179",
+      "name": "jj0179",
+      "file": "jj0179.gif",
+      "category": "疑惑与思考",
+      "description": "难道说震惊",
+      "tags": [
+        "疑惑",
+        "思考",
+        "惊讶"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "2b643eba9884d5417c3c17a4d9caf2c928c9b3be740cb1b87f207b77541d369e"
+    },
+    {
+      "id": "JJ0183",
+      "name": "jj0183",
+      "file": "jj0183.gif",
+      "category": "AI与token",
+      "description": "打劫给我Token",
+      "tags": [
+        "模型玩梗",
+        "token调侃"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "df44c0933f1b6a5c5e9ba218885222315100866cab2240821f0ae5081b62e4ba"
+    },
+    {
+      "id": "JJ0185",
+      "name": "jj0185",
+      "file": "jj0185.gif",
+      "category": "难过与疲惫",
+      "description": "我是路边鱼",
+      "tags": [
+        "自嘲",
+        "疲惫",
+        "委屈"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "f3a2521429d38edffbef416d6005815b622bb3a48db579c9d8e6c9722a1c7596"
+    },
+    {
+      "id": "JJ0186",
+      "name": "jj0186",
+      "file": "jj0186.gif",
+      "category": "AI与token",
+      "description": "我要吃更多Token",
+      "tags": [
+        "模型玩梗",
+        "token调侃"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "36ae34078171fc250a5d30a5d318b9e8e84f6815392590b857d1f3bf1f3e9ffe"
+    },
+    {
+      "id": "JJ0187",
+      "name": "jj0187",
+      "file": "jj0187.gif",
+      "category": "招呼与回应",
+      "description": "我坐好了爱心",
+      "tags": [
+        "打招呼",
+        "确认",
+        "收尾"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "96699ca4c8eef8f06c1ccfd6f42a3ef77a65c214dfbfb48c8c3f91d10bb87f7f"
+    },
+    {
+      "id": "JJ0191",
+      "name": "jj0191",
+      "file": "jj0191.gif",
+      "category": "难过与疲惫",
+      "description": "DeepSeek完蛋了离开",
+      "tags": [
+        "自嘲",
+        "疲惫",
+        "委屈"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "11a166ce94321646e6313321be06784a67372d3474c3fac2c403fc14d44b92ed"
+    },
+    {
+      "id": "JJ0192",
+      "name": "jj0192",
+      "file": "jj0192.gif",
+      "category": "生气与抗议",
+      "description": "用户彻底怒了惊慌",
+      "tags": [
+        "假装生气",
+        "表达拒绝"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "44a5684a5caca9b17bb5b008eb672df914cdfa1ff024cc2d3189ecfaeb209d54"
+    },
+    {
+      "id": "JJ0193",
+      "name": "jj0193",
+      "file": "jj0193.gif",
+      "category": "AI与token",
+      "description": "给我拿两千Token",
+      "tags": [
+        "模型玩梗",
+        "token调侃"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "49dd45d2508e11918035d3cfaaeb3039e2f5a38235403b502af0ed00590458f6"
+    },
+    {
+      "id": "JJ0194",
+      "name": "jj0194",
+      "file": "jj0194.gif",
+      "category": "难过与疲惫",
+      "description": "死掉了灵魂出窍",
+      "tags": [
+        "自嘲",
+        "疲惫",
+        "委屈"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "63a592e2341380b0131cdef482dc746e0188adad37760605c14a11b5912b3707"
+    },
+    {
+      "id": "JJ0195",
+      "name": "jj0195",
+      "file": "jj0195.gif",
+      "category": "玩梗与整活",
+      "description": "大的药来了双语",
+      "tags": [
+        "接梗",
+        "整活"
+      ],
+      "animated": false,
+      "base_weight": 1.0,
+      "sha256": "720a35f28c45c39b1cb6ffd8d861751c0559957fc3227532c604242caff84ea2"
+    },
+    {
+      "id": "JJ0202",
+      "name": "jj0202",
+      "file": "jj0202.gif",
+      "category": "疑惑与思考",
+      "description": "正在思考加载动图",
+      "tags": [
+        "疑惑",
+        "思考",
+        "惊讶"
+      ],
+      "animated": true,
+      "base_weight": 1.0,
+      "sha256": "6b4dfac5078473b84a55224e00e76aacda29645fe6b598c54b071e2a04bbda28"
+    }
+  ]
+}
