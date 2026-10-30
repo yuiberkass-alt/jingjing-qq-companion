@@ -1,0 +1,5 @@
+name: astrbot_plugin_jingjing_bili
+desc: 鲸鲸的 B 站私信（读取/回复，逛 B 站需授权）
+version: v0.1
+author: jingjing
+repo: local
